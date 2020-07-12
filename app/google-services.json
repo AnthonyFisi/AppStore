@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "795474083405",
+    "firebase_url": "https://yego-22b59.firebaseio.com",
+    "project_id": "yego-22b59",
+    "storage_bucket": "yego-22b59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795474083405:android:d7dab76b3f7f276f1b2604",
+        "android_client_info": {
+          "package_name": "com.example.empresayego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795474083405-avjab86m9jtve2vljj34sh37oq6m2d6v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.empresayego",
+            "certificate_hash": "363b7a2c263a5d17c56bc555a35dd9cfbf3b1fb1"
+          }
+        },
+        {
+          "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJFFb-cAg62P3WPF8eqpT211WO6TsUh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.OrderUI.ReadyOrder.ReadyOrderDetail.OrderReadyDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.OrderUI.ReadyOrder.ReadyOrderDetail.OrderReadyDetailActivity">
+
+        <fragment
+            android:id="@+id/fragment_ready_order_detail_PERSON_DELIVERY"
+            android:name="com.example.empresayego.View.OrderUI.ReadyOrder.ReadyOrderDetail.PersonDelivery.PersonDeliveryFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/fragment_ready_order_detail_PRODUCTS"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_person_delivery" />
+
+
+        <fragment
+            android:id="@+id/fragment_ready_order_detail_PRODUCTS"
+            android:name="com.example.empresayego.View.OrderUI.ReadyOrder.ReadyOrderDetail.Products.ProductsFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/CONFIRMAR_ENTREGA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_ready_order_detail_PERSON_DELIVERY"
+            tools:layout="@layout/fragment_products" />
+
+        <Button
+            android:id="@+id/CONFIRMAR_ENTREGA"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:text="Confirmar Entrega"
+            style="@style/ButtonOrder"
+            android:background="@drawable/fragment_button_estados"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_ready_order_detail_PRODUCTS" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

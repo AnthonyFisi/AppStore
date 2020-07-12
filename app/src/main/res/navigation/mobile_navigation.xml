@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.empresayego.View.OrderUI.NewOrder.ListNewOdersFragment"
+        android:label="@string/title_new_order"
+        tools:layout="@layout/fragment_list_new_orders" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.empresayego.View.OrderUI.ProcessOrder.ProcesOrderFragment"
+        android:label="@string/title_proceso"
+        tools:layout="@layout/fragment_proces_orders" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.empresayego.View.OrderUI.ReadyOrder.ReadyOrderFragment"
+        android:label="@string/title_ready"
+        tools:layout="@layout/fragment_ready_order" />
+
+
+
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.empresayego.View.DrawerUI.productos.ProductoFragment"
+        android:label="GalleryFragment"
+        tools:layout="@layout/fragment_producto" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.empresayego.View.DrawerUI.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.example.empresayego.View.DrawerUI.send.SendFragment"
+        android:label="SendFragment"
+        tools:layout="@layout/fragment_send" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="com.example.empresayego.View.DrawerUI.share.ShareFragment"
+        android:label="fragment_share"
+        tools:layout="@layout/fragment_share" />
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="com.example.empresayego.View.DrawerUI.tools.ToolsFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_tools" />
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.empresayego.View.DrawerUI.slideshow.SlideshowFragment"
+        android:label="fragment_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+</navigation>
