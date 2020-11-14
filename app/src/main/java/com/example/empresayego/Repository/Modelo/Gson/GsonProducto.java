@@ -8,16 +8,15 @@ import java.util.List;
 
 public class GsonProducto {
 
-    @SerializedName("listaProductos")
+    @SerializedName("listaProducto")
     @Expose
-    private List<Producto> listaProductos;
+    private List<Producto> listaProducto;
 
-
-    public List<Producto> getListaProductos() {
-        return listaProductos;
+    public List<Producto> getListaProducto() {
+        return listaProducto;
     }
 
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
+    public void setListaProducto(List<Producto> listaProducto) {
+        this.listaProducto = listaProducto;
     }
 }

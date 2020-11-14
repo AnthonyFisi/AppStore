@@ -36,8 +36,8 @@ public class VentaRepository {
         ventaService = retrofit.create(VentaService.class);
     }
 
-    public void updateEstadoVentaTiempo(int idVenta,int tiempo){
-        ventaService.updateEstadoVentaTiempo(idVenta,tiempo).enqueue(new Callback<Venta>() {
+    public void updateEstadoVentaTiempo(String token,int idVenta,int tiempo){
+        ventaService.updateEstadoVentaTiempo(token,idVenta,tiempo).enqueue(new Callback<Venta>() {
             @Override
             public void onResponse(Call<Venta> call, Response<Venta> response) {
 
@@ -63,8 +63,8 @@ public class VentaRepository {
     }
 
 
-    public void updateEstadoVentaCostoTotal(int idVenta,float tiempo){
-        ventaService.updateEstadoVentaCosto(idVenta,tiempo).enqueue(new Callback<Venta>() {
+    public void updateEstadoVentaCostoTotal(String token,int idVenta,float tiempo){
+        ventaService.updateEstadoVentaCosto(token,idVenta,tiempo).enqueue(new Callback<Venta>() {
             @Override
             public void onResponse(Call<Venta> call, Response<Venta> response) {
 
@@ -90,8 +90,8 @@ public class VentaRepository {
     }
 
 
-    public void updateEstadoVentaCostoCancelar(Venta venta){
-        ventaService.updateEstadoVentaCancelar(venta).enqueue(new Callback<Venta>() {
+    public void updateEstadoVentaCostoCancelar(String token,Venta venta){
+        ventaService.updateEstadoVentaCancelar(token,venta).enqueue(new Callback<Venta>() {
             @Override
             public void onResponse(Call<Venta> call, Response<Venta> response) {
 

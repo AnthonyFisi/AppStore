@@ -9,21 +9,33 @@ public class Repartidor {
     @Expose
     private int idrepartidor;
 
-    @SerializedName("nombre")
+    @SerializedName("placa_vehiculo")
     @Expose
-    private String nombre;
+    private String placa_vehiculo;
 
-    @SerializedName("url_imagen")
+    @SerializedName("imagen_vehiculo")
     @Expose
-    private String url_imagen;
+    private String imagen_vehiculo;
 
-    @SerializedName("codigo")
+    @SerializedName("tipo_brevete")
     @Expose
-    private String codigo;
+    private String tipo_brevete;
 
-    @SerializedName("telefono")
+    @SerializedName("detalles")
     @Expose
-    private String telefono;
+    private String detalles;
+
+    @SerializedName("disponible")
+    @Expose
+    private boolean disponible ;
+
+    @SerializedName("idusuariogeneral")
+    @Expose
+    private int idusuariogeneral;
+
+    @SerializedName("idempresa")
+    @Expose
+    private int idempresa;
 
 
 
@@ -36,35 +48,59 @@ public class Repartidor {
         this.idrepartidor = idrepartidor;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getPlaca_vehiculo() {
+        return placa_vehiculo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setPlaca_vehiculo(String placa_vehiculo) {
+        this.placa_vehiculo = placa_vehiculo;
     }
 
-    public String getUrl_imagen() {
-        return url_imagen;
+    public String getImagen_vehiculo() {
+        return imagen_vehiculo;
     }
 
-    public void setUrl_imagen(String url_imagen) {
-        this.url_imagen = url_imagen;
+    public void setImagen_vehiculo(String imagen_vehiculo) {
+        this.imagen_vehiculo = imagen_vehiculo;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getTipo_brevete() {
+        return tipo_brevete;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setTipo_brevete(String tipo_brevete) {
+        this.tipo_brevete = tipo_brevete;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getDetalles() {
+        return detalles;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public int getIdusuariogeneral() {
+        return idusuariogeneral;
+    }
+
+    public void setIdusuariogeneral(int idusuariogeneral) {
+        this.idusuariogeneral = idusuariogeneral;
+    }
+
+    public int getIdempresa() {
+        return idempresa;
+    }
+
+    public void setIdempresa(int idempresa) {
+        this.idempresa = idempresa;
     }
 }

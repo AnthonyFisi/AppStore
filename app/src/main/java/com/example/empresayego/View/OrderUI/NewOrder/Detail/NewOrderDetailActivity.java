@@ -1,6 +1,7 @@
 package com.example.empresayego.View.OrderUI.NewOrder.Detail;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,24 +28,32 @@ public class NewOrderDetailActivity extends AppCompatActivity implements NewOrde
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_order_detail);
 
+        setContentView(R.layout.activity_new_order_detail);
 
 
         //RECIVE DATA
         reciveDataIntent();
 
 
-        //SEND DATA
-        passDataFragemnt();
+        Toolbar toolbar2 = findViewById(R.id.toolbar2);
 
+        setSupportActionBar(toolbar2);
+
+        toolbar2.setNavigationOnClickListener(v->onBackPressed());
+
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("EMPRESA",mRestaurante_pedido);
+        NewOrderDetailFragment fragment=new NewOrderDetailFragment();
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_new_order_detail,fragment).commit();
 
     }
 
 
-    private void returnData(){
 
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " los datos estan retornando" + position +" ##");
+
+    private void returnData(){
 
         Intent returnIntent = new Intent();
         Bundle bundle= new Bundle();
@@ -56,12 +65,6 @@ public class NewOrderDetailActivity extends AppCompatActivity implements NewOrde
     }
 
 
-    private void passDataFragemnt(){
-        NewOrderDetailFragment fragment = (NewOrderDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_new_order_detail);
-        if(fragment !=null){
-            fragment.setPassData(mRestaurante_pedido);
-        }
-    }
     private void reciveDataIntent(){
         if(getIntent().getSerializableExtra(RESTAURANTE_PEDIDO) !=null){
             mRestaurante_pedido=(Restaurante_Pedido) getIntent().getSerializableExtra(RESTAURANTE_PEDIDO);
@@ -69,14 +72,6 @@ public class NewOrderDetailActivity extends AppCompatActivity implements NewOrde
         if(getIntent().getSerializableExtra(POSITION) !=null){
             position=getIntent().getIntExtra(POSITION,100000);
         }
-
-
-        numeroOrden="#"+mRestaurante_pedido.getIdempresa()+""+
-                mRestaurante_pedido.getIdpedido()+""+
-                mRestaurante_pedido.getIdventa();
-
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " el objeto llego  y la possicion " + position +" ##");
-
     }
 
 
@@ -91,7 +86,6 @@ public class NewOrderDetailActivity extends AppCompatActivity implements NewOrde
     @Override
     public void onDataPass(boolean agregar) {
         this.agregar=agregar;
-        //RETURN DATA
         returnData();
     }
 

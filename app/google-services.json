@@ -42,6 +42,117 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795474083405:android:c06577af9270f3641b2604",
+        "android_client_info": {
+          "package_name": "com.example.motorizadoyego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795474083405-1qt2fd9gp0fa41rgov2q1kf28um20nmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.motorizadoyego",
+            "certificate_hash": "363b7a2c263a5d17c56bc555a35dd9cfbf3b1fb1"
+          }
+        },
+        {
+          "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJFFb-cAg62P3WPF8eqpT211WO6TsUh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795474083405:android:deff5b0a72054b0a1b2604",
+        "android_client_info": {
+          "package_name": "com.example.yego"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795474083405-tf4hhtpg6g5t8fkvjsqcdjtjcu8rmm5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yego",
+            "certificate_hash": "363b7a2c263a5d17c56bc555a35dd9cfbf3b1fb1"
+          }
+        },
+        {
+          "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJFFb-cAg62P3WPF8eqpT211WO6TsUh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795474083405:android:3a8bbea96c9c97b11b2604",
+        "android_client_info": {
+          "package_name": "com.example.yegousuario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795474083405-4rm87tg6obr5ft01ohtn3tmfqthfqr6j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yegousuario",
+            "certificate_hash": "363b7a2c263a5d17c56bc555a35dd9cfbf3b1fb1"
+          }
+        },
+        {
+          "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJFFb-cAg62P3WPF8eqpT211WO6TsUh8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795474083405-elh5o5dgp866moi4n9nsu8ki698hs38b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

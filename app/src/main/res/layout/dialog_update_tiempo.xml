@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/dialog_update_tiempo_DISMINUIR_TIEMPO"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/menos" />
+
+            <TextView
+                android:id="@+id/dialog_update_tiempo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="5"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/dialog_update_tiempo_INCREMENTAR_TIEMPO"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/mas" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="150dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="tiempo"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <Spinner
+                    android:id="@+id/spinner_inicio"
+                    android:gravity="center"
+                    android:layout_width="80dp"
+                    android:layout_height="50dp" />
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+-->
+    <LinearLayout
+        android:id="@+id/linearLayout_update_tiempo"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:background="@drawable/ic_back"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="Cambiar tiempo entrega"
+            android:textColor="@color/titulo"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/dialog_update_tiempo_DISMINUIR_TIEMPO"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:backgroundTint="@color/original_color"
+                    android:background="@drawable/menos" />
+
+                <TextView
+                    android:id="@+id/dialog_update_tiempo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:text="5"
+                    android:textSize="40dp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/dialog_update_tiempo_INCREMENTAR_TIEMPO"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:backgroundTint="@color/original_color"
+                    android:background="@drawable/mas" />
+            </LinearLayout>
+
+            <TextView
+                android:text="min"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView_update_tiempo"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/original_color"
+                app:cardCornerRadius="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:text="Actualizar tiempo"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <!-- <ImageView
+                         android:background="@drawable/ic_action_send"
+                         android:backgroundTint="@color/white"
+                         android:layout_gravity="center"
+                         android:layout_width="40dp"
+                         android:layout_height="40dp"/>
+                         -->
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_progressbar"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearlayout_success"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/comprobado"
+            android:backgroundTint="@color/green" />
+
+
+        <TextView
+            android:id="@+id/numero_venta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:text="Tiempo Actualizado"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/textView_tiempo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:text="24 minutos"
+            android:textSize="20sp" />
+
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_cerrar"
+            android:layout_width="100dp"
+            android:elevation="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Cerrar"
+
+                android:textColor="@color/green"
+                android:textSize="20sp" />
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

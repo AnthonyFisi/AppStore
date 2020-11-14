@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_menu_new_order"
+        android:id="@+id/navigation_list_new_orders"
+        android:icon="@drawable/boleto"
         android:title="@string/title_new_order" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_menu_preparando"
+        android:id="@+id/navigation_proces_orders"
+        android:icon="@drawable/ic_menu_preparandose"
         android:title="@string/title_proceso" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_menu_listo"
+        android:id="@+id/navigation_ready_order"
+        android:icon="@drawable/comprobado"
         android:title="@string/title_ready" />
+
+    <item
+        android:id="@+id/nav_historial"
+        android:icon="@drawable/historia"
+        android:title="@string/historial" />
 
 </menu>

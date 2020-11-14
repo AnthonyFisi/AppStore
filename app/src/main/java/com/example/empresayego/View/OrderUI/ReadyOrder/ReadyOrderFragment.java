@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,26 +36,24 @@ import java.util.List;
 
 public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoReadyResultsAdapter.ClickPedidoReciente {
 
-    public final static int CODE=3;
+    private final static int CODE=3;
 
     private Restaurante_PedidoViewModel viewModel;
     private Restaurante_PedidoReadyResultsAdapter adapter;
 
     private boolean agregar=false;
 
-    private int idEmpresa=23;
-
     private int position=1000;
 
-    private LinearLayout imagen;
-
-    private boolean data=false;
+    private LinearLayout pedidos_listos_empty;
 
     private Restaurante_Pedido mRestaurante_pedido=new Restaurante_Pedido();
 
     private RecyclerView recyclerView;
 
     private SearchView searchView;
+
+    private ProgressBar progres;
 
 
     @Override
@@ -70,23 +69,21 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
         viewModel.getRestaurante_PedidoLiveData().observe(this, new Observer<GsonRestaurante_Pedido>() {
             @Override
             public void onChanged(GsonRestaurante_Pedido gsonRestaurante_pedido) {
+                progres.setVisibility(View.GONE);
                 if(gsonRestaurante_pedido !=null){
-                    if(gsonRestaurante_pedido.getListaRestaurante_Pedido() !=null){
-                        adapter.setResults(gsonRestaurante_pedido.getListaRestaurante_Pedido(), ReadyOrderFragment.this);
-                        data=true;
-                        System.out.println("RESULTADO DE DATA" +data);
-                    }
 
+                    adapter.setResults(gsonRestaurante_pedido.getListaRestaurante_Pedido(), ReadyOrderFragment.this);
+
+
+                }else {
+                    pedidos_listos_empty.setVisibility(View.VISIBLE);
                 }
 
 
             }
         });
 
-        if(Empresa.sEmpresa.isDisponible()){
-            AsyncTaskRunner runner = new AsyncTaskRunner();
-            runner.execute("3");
-        }
+
 
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -94,14 +91,25 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
 
         View root = inflater.inflate(R.layout.fragment_ready_order, container, false);
 
-        imagen=root.findViewById(R.id.imagen);
-        imagen.setVisibility(View.GONE);
+        pedidos_listos_empty=root.findViewById(R.id.pedidos_listos_empty);
+        pedidos_listos_empty.setVisibility(View.GONE);
+        progres=root.findViewById(R.id.progres);
 
      recyclerView=root.findViewById(R.id.fragment_restaurante_ordenReady);
         //viewModel.searchRestaurantePedidoByEmpresaReady(idEmpresa);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         searchOrder(root);
+
+        if(Empresa.sEmpresa.isDisponible()){
+
+            progres.setVisibility(View.VISIBLE);
+            viewModel.searchRestaurantePedidoByEmpresaReady(Empresa.sEmpresa.getIdempresa());
+
+        }
+
+        recyclerView.setAdapter(adapter);
+
 
         return root;
     }
@@ -141,10 +149,12 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
     @Override
     public void clickPedido(Restaurante_Pedido restaurante_pedido, int posisiton) {
 
+
+
         Toast.makeText(getContext(),"position " +  posisiton,Toast.LENGTH_SHORT).show();
         Intent intent= OrderReadyDetailActivity.newIntentOrderReadyDetail(getContext(),restaurante_pedido, posisiton);
         startActivityForResult(intent,CODE);
-        System.out.println(restaurante_pedido.getIdventa() + "  "+ restaurante_pedido.getUsuario_nombre());
+        System.out.println(restaurante_pedido.getIdventa() + "  "+ restaurante_pedido.getNombre());
 
         System.out.println(restaurante_pedido.getListaProductos());
 
@@ -166,7 +176,7 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
                 position=bundle.getInt("position");
                 mRestaurante_pedido=(Restaurante_Pedido) bundle.getSerializable("objeto");
 
-                System.out.println( mRestaurante_pedido.getUsuario_nombre() + " LOS DATOS LLEGARON " + position +" ##"+ "la rpta es " + agregar);
+                System.out.println( mRestaurante_pedido.getNombre() + " LOS DATOS LLEGARON " + position +" ##"+ "la rpta es " + agregar);
 
 
 
@@ -186,14 +196,14 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
             System.out.println( "ESTAMOS REMOVIENDO");
             adapter.removeItem(mRestaurante_pedido,position);
             if(adapter.resultSize()==0){
-                imagen.setVisibility(View.VISIBLE);
+                pedidos_listos_empty.setVisibility(View.VISIBLE);
 
             }
             agregar=false;
         }
     }
 
-
+/*
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
@@ -203,7 +213,6 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
         @Override
         protected String doInBackground(String... params) {
 
-            viewModel.searchRestaurantePedidoByEmpresaReady(idEmpresa);
             publishProgress("Sleeping..."); // Calls onProgressUpdate()
             try {
                 int time = Integer.parseInt(params[0])*1000;
@@ -253,5 +262,5 @@ public class ReadyOrderFragment extends Fragment implements  Restaurante_PedidoR
 
         }
     }
-
+*/
 }

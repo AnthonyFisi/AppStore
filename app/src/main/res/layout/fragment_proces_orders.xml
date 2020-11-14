@@ -1,55 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="#556573"
-    >
-
-    <LinearLayout
-        android:id="@+id/imagen"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:src="@drawable/frito"
-            android:scaleType="fitXY"
-            android:layout_width="100dp"
-            android:layout_height="100dp"/>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/mensaje"
-                android:text="No hay pedidos preparandose"
-                android:textSize="15dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:background="#FFFFFF"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_restaurante_ordenProces"
+
+    <ProgressBar
+        android:id="@+id/progres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="@color/green"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/pedidos_preparandose_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
+            android:background="@drawable/step2" />
+
+
+    </LinearLayout>
+
+<!--
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/update_pedido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/update_pedido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF8B8B"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="New contents available"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_restaurante_ordenProces"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_restaurante_ordenProces"
@@ -58,8 +75,40 @@ android:background="#556573"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+
+    <!--
+
+        <LinearLayout
+            android:id="@+id/imagen"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:src="@drawable/frito"
+                android:scaleType="fitXY"
+                android:layout_width="100dp"
+                android:layout_height="100dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/mensaje"
+                    android:text="No hay pedidos preparandose"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    -->

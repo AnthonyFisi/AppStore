@@ -9,9 +9,9 @@ public class Orden_estado_restaurantePK {
     @Expose
     private int idventa;
 
-    @SerializedName("idestado_venta")
+    @SerializedName("idestado_empresa")
     @Expose
-    private int idestado_venta;
+    private int idestado_empresa;
 
 
     public int getIdventa() {
@@ -22,11 +22,11 @@ public class Orden_estado_restaurantePK {
         this.idventa = idventa;
     }
 
-    public int getIdestado_venta() {
-        return idestado_venta;
+    public int getIdestado_empresa() {
+        return idestado_empresa;
     }
 
-    public void setIdestado_venta(int idestado_venta) {
-        this.idestado_venta = idestado_venta;
+    public void setIdestado_empresa(int idestado_empresa) {
+        this.idestado_empresa = idestado_empresa;
     }
 }

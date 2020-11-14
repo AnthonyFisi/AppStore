@@ -31,9 +31,9 @@ public class ProductsResultsAdapter extends RecyclerView.Adapter<ProductsResults
 
         ProductoJOINregistroPedidoJOINpedido producto= results.get(position);
 
-        holder.fragment_new_order_item_detail_CANTIDAD_PRODUCTO.setText(String.valueOf(producto.getPedido_cantidadtotal()));
+        holder.fragment_new_order_item_detail_CANTIDAD_PRODUCTO.setText(String.valueOf(producto.getRegistropedido_cantidadtotal()));
         holder.fragment_new_order_item_detail_NOMBRE_PRODUCTO.setText(producto.getProducto_nombre());
-        holder.fragment_new_order_item_detail_PRECIO_PRODUCTO.setText(String.valueOf(producto.getPedido_montototal()));
+        holder.fragment_new_order_item_detail_PRECIO_PRODUCTO.setText(String.valueOf(producto.getRegistropedido_preciototal()));
         holder.fragment_new_order_item_detail_COMENTARIO_PRODUCTO.setText(producto.getComentario());
     }
 

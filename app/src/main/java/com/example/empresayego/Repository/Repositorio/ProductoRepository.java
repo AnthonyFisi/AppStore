@@ -1,8 +1,8 @@
 package com.example.empresayego.Repository.Repositorio;
 
 import com.example.empresayego.Repository.Modelo.Gson.GsonProducto;
+import com.example.empresayego.Repository.Modelo.Producto;
 import com.example.empresayego.Repository.Service.ProductoService;
-import com.example.empresayego.Repository.Service.RepartidorService;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,9 +21,11 @@ public class ProductoRepository {
 
     private ProductoService mProductoService;
     private MutableLiveData<GsonProducto> mGsonProductoMutableLiveData;
+    private MutableLiveData<Producto>  mProductoMutableLiveData;
 
     public ProductoRepository(){
         mGsonProductoMutableLiveData=new MutableLiveData<>();
+        mProductoMutableLiveData= new MutableLiveData<>();
         HttpLoggingInterceptor interceptor=new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client= new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -37,19 +39,26 @@ public class ProductoRepository {
         mProductoService= retrofit.create(ProductoService.class);
     }
 
-    public void searchProductoById(int idEmpresa){
-        mProductoService.searchProductoById(idEmpresa).enqueue(new Callback<GsonProducto>() {
+    public void searchProductoById(String token,int idEmpresa){
+        mProductoService.searchProductoById(token,idEmpresa).enqueue(new Callback<GsonProducto>() {
             @Override
             public void onResponse(Call<GsonProducto> call, Response<GsonProducto> response) {
                 if(response.code()==200 && response.body()!=null){
+                    System.out.println("GOOD 1");
 
-                    mGsonProductoMutableLiveData.setValue(response.body());
+                    mGsonProductoMutableLiveData.postValue(response.body());
+                }else {
+                    System.out.println("GOOD 2");
+
+                    mGsonProductoMutableLiveData.postValue(null);
+
                 }
             }
 
             @Override
             public void onFailure(Call<GsonProducto> call, Throwable t) {
                 mGsonProductoMutableLiveData.setValue(null);
+                System.out.println("GOOD 3");
 
 
 
@@ -57,7 +66,86 @@ public class ProductoRepository {
         });
     }
 
-    public LiveData<GsonProducto> getGsonProductoDataLiveData(){
-        return  getGsonProductoDataLiveData();
+    public void updateStateProduto(String token,int idProducto,int idEmpresa,boolean state){
+        mProductoService.updateStateProducto(token,idProducto,idEmpresa,state).enqueue(new Callback<Producto>() {
+            @Override
+            public void onResponse(Call<Producto> call, Response<Producto> response) {
+
+                if(response.code()==200 && response.body()!=null){
+
+                   mProductoMutableLiveData.postValue(response.body());
+
+                    System.out.println("GOOD 1");
+                }else {
+                    System.out.println("BAD 2");
+
+                    mProductoMutableLiveData.postValue(null);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Producto> call, Throwable t) {
+                System.out.println("BAD 3");
+
+                System.out.println(t.getCause()+"/"+t.getLocalizedMessage()+"/"+t.getStackTrace());
+
+                mProductoMutableLiveData.postValue(null);
+
+            }
+        });
+    }
+
+    public void searchListProducto(String token,int idcategoriaproducto, int idempresa){
+        mProductoService.searchListProducto(token,idcategoriaproducto,idempresa).enqueue(new Callback<GsonProducto>() {
+            @Override
+            public void onResponse(Call<GsonProducto> call, Response<GsonProducto> response) {
+
+
+                if(response.code()==400 || response.code()==401 || response.code()==500){
+                    mGsonProductoMutableLiveData.postValue(null);
+                }
+
+                if(response.body() !=null && response.code()==200){
+                    mGsonProductoMutableLiveData.setValue(response.body());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GsonProducto> call, Throwable t) {
+                System.out.println("ESTOY EN DATOS NULOSSSSSS");
+
+                mGsonProductoMutableLiveData.postValue(null);
+            }
+        });
+    }
+
+    public void insertProduct(String token,int idempresa,int idcategoriaproducto,Producto producto){
+        mProductoService.insertProducto(token,idempresa,idcategoriaproducto,producto).enqueue(new Callback<Producto>() {
+            @Override
+            public void onResponse(Call<Producto> call, Response<Producto> response) {
+
+                if(response.code()==400 || response.code()==401 || response.code()==500){
+                    mProductoMutableLiveData.postValue(null);
+                }
+
+                if(response.body() !=null && response.code()==200){
+                    mProductoMutableLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Producto> call, Throwable t) {
+                mProductoMutableLiveData.postValue(null);
+
+            }
+        });
+    }
+
+    public LiveData<GsonProducto> getProductoGsonDataLiveData(){ return  mGsonProductoMutableLiveData; }
+
+    public LiveData<Producto> getProductoDataLiveData(){
+        return  mProductoMutableLiveData;
     }
 }

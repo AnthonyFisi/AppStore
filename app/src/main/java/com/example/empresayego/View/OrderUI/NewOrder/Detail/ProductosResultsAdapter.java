@@ -33,7 +33,8 @@ public class ProductosResultsAdapter extends RecyclerView.Adapter<ProductosResul
 
         holder.fragment_new_order_item_detail_CANTIDAD_PRODUCTO.setText(String.valueOf(producto.getRegistropedido_cantidadtotal()));
         holder.fragment_new_order_item_detail_NOMBRE_PRODUCTO.setText(producto.getProducto_nombre());
-        holder.fragment_new_order_item_detail_PRECIO_PRODUCTO.setText(String.valueOf(producto.getRegistropedido_preciototal()));
+        String precio="S/ "+producto.getRegistropedido_preciototal();
+        holder.fragment_new_order_item_detail_PRECIO_PRODUCTO.setText(precio);
         holder.fragment_new_order_item_detail_COMENTARIO_PRODUCTO.setText(producto.getComentario());
     }
 

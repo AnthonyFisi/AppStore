@@ -9,7 +9,6 @@ public class Empresa implements Serializable {
 
     public static Empresa sEmpresa;
 
-
     @SerializedName("idempresa")
     @Expose
     private int idempresa;
@@ -54,13 +53,17 @@ public class Empresa implements Serializable {
     @Expose
     private int idcuentaempresa;
 
+    @SerializedName("cuentaactiva")
+    @Expose
+    private boolean cuentaactiva;
+
     @SerializedName("porcentaje_popularidad")
     @Expose
     private double porcentaje_popularidad;
 
     @SerializedName("cuenta_delivery")
     @Expose
-    private boolean cuenta_delivery;
+    private boolean cuenta_Delivery;
 
     @SerializedName("costo_delivery")
     @Expose
@@ -83,6 +86,7 @@ public class Empresa implements Serializable {
     @Expose
     private String icono_empresa;
 
+
     @SerializedName("horario_inicio")
     @Expose
     private int horario_inicio;
@@ -103,26 +107,6 @@ public class Empresa implements Serializable {
     @Expose
     private float estrella_empresa;
 
-    @SerializedName("productospopulares")
-    @Expose
-    private String productospopulares;
-
-    @SerializedName("categoria1")
-    @Expose
-    private String categoria1;
-
-    @SerializedName("categoria2")
-    @Expose
-    private String categoria2;
-
-    @SerializedName("categoria3")
-    @Expose
-    private String categoria3;
-
-    @SerializedName("categoria4")
-    @Expose
-    private String categoria4;
-
 
 
     @SerializedName("maps_coordenada_x")
@@ -141,6 +125,45 @@ public class Empresa implements Serializable {
     @Expose
     private boolean disponible;
 
+    @SerializedName("precio_menu")
+    @Expose
+    private float precio_menu;
+
+    @SerializedName("monto_descuento_menu")
+    @Expose
+    private float monto_descuento_menu;
+
+    @SerializedName("idusuariogeneral")
+    @Expose
+    private int idusuariogeneral;
+
+    @SerializedName("apellido")
+    @Expose
+    private String apellido;
+
+    @SerializedName("nombre")
+    @Expose
+    private String nombre;
+
+    @SerializedName("correo")
+    @Expose
+    private String correo;
+
+    @SerializedName("celular")
+    @Expose
+    private String celular;
+
+    @SerializedName("foto")
+    @Expose
+    private String foto;
+
+    public String getIcono_empresa() {
+        return icono_empresa;
+    }
+
+    public void setIcono_empresa(String icono_empresa) {
+        this.icono_empresa = icono_empresa;
+    }
 
     public int getIdempresa() {
         return idempresa;
@@ -238,12 +261,12 @@ public class Empresa implements Serializable {
         this.porcentaje_popularidad = porcentaje_popularidad;
     }
 
-    public boolean isCuenta_delivery() {
-        return cuenta_delivery;
+    public boolean isCuenta_Delivery() {
+        return cuenta_Delivery;
     }
 
-    public void setCuenta_delivery(boolean cuenta_delivery) {
-        this.cuenta_delivery = cuenta_delivery;
+    public void setCuenta_Delivery(boolean cuenta_Delivery) {
+        this.cuenta_Delivery = cuenta_Delivery;
     }
 
     public float getCosto_delivery() {
@@ -262,6 +285,8 @@ public class Empresa implements Serializable {
         this.detalle_delivery = detalle_delivery;
     }
 
+
+
     public int getIddistrito() {
         return iddistrito;
     }
@@ -276,14 +301,6 @@ public class Empresa implements Serializable {
 
     public void setTiempo_aproximado_entrega(String tiempo_aproximado_entrega) {
         this.tiempo_aproximado_entrega = tiempo_aproximado_entrega;
-    }
-
-    public String getIcono_empresa() {
-        return icono_empresa;
-    }
-
-    public void setIcono_empresa(String icono_empresa) {
-        this.icono_empresa = icono_empresa;
     }
 
     public int getHorario_inicio() {
@@ -326,46 +343,6 @@ public class Empresa implements Serializable {
         this.estrella_empresa = estrella_empresa;
     }
 
-    public String getProductospopulares() {
-        return productospopulares;
-    }
-
-    public void setProductospopulares(String productospopulares) {
-        this.productospopulares = productospopulares;
-    }
-
-    public String getCategoria1() {
-        return categoria1;
-    }
-
-    public void setCategoria1(String categoria1) {
-        this.categoria1 = categoria1;
-    }
-
-    public String getCategoria2() {
-        return categoria2;
-    }
-
-    public void setCategoria2(String categoria2) {
-        this.categoria2 = categoria2;
-    }
-
-    public String getCategoria3() {
-        return categoria3;
-    }
-
-    public void setCategoria3(String categoria3) {
-        this.categoria3 = categoria3;
-    }
-
-    public String getCategoria4() {
-        return categoria4;
-    }
-
-    public void setCategoria4(String categoria4) {
-        this.categoria4 = categoria4;
-    }
-
     public String getMaps_coordenada_x() {
         return maps_coordenada_x;
     }
@@ -396,5 +373,77 @@ public class Empresa implements Serializable {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public float getPrecio_menu() {
+        return precio_menu;
+    }
+
+    public void setPrecio_menu(float precio_menu) {
+        this.precio_menu = precio_menu;
+    }
+
+    public float getMonto_descuento_menu() {
+        return monto_descuento_menu;
+    }
+
+    public void setMonto_descuento_menu(float monto_descuento_menu) {
+        this.monto_descuento_menu = monto_descuento_menu;
+    }
+
+    public int getIdusuariogeneral() {
+        return idusuariogeneral;
+    }
+
+    public void setIdusuariogeneral(int idusuariogeneral) {
+        this.idusuariogeneral = idusuariogeneral;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public boolean isCuentaactiva() {
+        return cuentaactiva;
+    }
+
+    public void setCuentaactiva(boolean cuentaactiva) {
+        this.cuentaactiva = cuentaactiva;
     }
 }

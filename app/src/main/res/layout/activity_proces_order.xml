@@ -4,21 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/activity_order_proces"
+        app:titleTextColor="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_proces_order_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back" />
 
 
     <fragment
         android:id="@+id/fragment_proces_order_detail"
         android:name="com.example.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderDetailFragment"
+        tools:layout="@layout/fragment_proces_orders_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout="@layout/fragment_proces_orders_detail" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 

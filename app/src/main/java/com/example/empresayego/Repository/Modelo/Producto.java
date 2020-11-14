@@ -3,6 +3,9 @@ package com.example.empresayego.Repository.Modelo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public class Producto {
 
     @SerializedName("idproducto")
@@ -13,7 +16,7 @@ public class Producto {
     @Expose
     private int idcategoriaproducto;
 
-    @SerializedName("idrempresa")
+    @SerializedName("idempresa")
     @Expose
     private int idempresa;
 
@@ -28,6 +31,10 @@ public class Producto {
     @SerializedName("producto_stock")
     @Expose
     private int producto_stock;
+
+    @SerializedName("productofechacreacion")
+    @Expose
+    private Timestamp productofechacreacion;
 
     @SerializedName("producto_uriimagen")
     @Expose
@@ -53,6 +60,9 @@ public class Producto {
     @Expose
     private boolean disponible;
 
+    @SerializedName("tipomenu")
+    @Expose
+    private int tipomenu;
 
 
 
@@ -153,5 +163,19 @@ public class Producto {
         this.disponible = disponible;
     }
 
+    public Timestamp getProductofechacreacion() {
+        return productofechacreacion;
+    }
 
+    public void setProductofechacreacion(Timestamp productofechacreacion) {
+        this.productofechacreacion = productofechacreacion;
+    }
+
+    public int getTipomenu() {
+        return tipomenu;
+    }
+
+    public void setTipomenu(int tipomenu) {
+        this.tipomenu = tipomenu;
+    }
 }

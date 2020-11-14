@@ -1,57 +1,49 @@
 package com.example.empresayego;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+
+import android.os.Build;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.util.Util;
 import com.example.empresayego.Proof.DisplayActivity;
 import com.example.empresayego.Repository.Modelo.Empresa;
 import com.example.empresayego.Repository.Modelo.Restaurante_Pedido;
 import com.example.empresayego.View.MapsActivity;
-import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity;
 import com.example.empresayego.View.ProcesoOrdenActivity;
 import com.example.empresayego.ViewModel.EmpresaViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 
 import android.os.Handler;
 import android.view.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.navigation.NavigationView;
+import androidx.navigation.ui.AppBarConfiguration;
+
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
 
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageView;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    public static Pusher pusher;
-    public static  Channel channel ;
+   // public static Pusher pusher;
+   // public static  Channel channel ;
     private int idEmpresa=23;
     private Button mButton;
 
@@ -66,24 +58,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         declararHttpRequestEmpresa();
-        PusherOptions options = new PusherOptions();
+   /*     PusherOptions options = new PusherOptions();
         options.setCluster("us2");
 
         pusher = new Pusher( "18c8170377c406cfcf3a", options);
         channel= MainActivity.pusher.subscribe("canal-orden-reciente-"+idEmpresa);
-
+*/
         mButton=findViewById(R.id.button);
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= ProcesoOrdenActivity.startIntentProceso(MainActivity.this,mEmpresa);
-                startActivity(intent);
+                //Intent intent= ProcesoOrdenActivity.startIntentProceso(MainActivity.this,mEmpresa);
+                //startActivity(intent);
             }
         });
 

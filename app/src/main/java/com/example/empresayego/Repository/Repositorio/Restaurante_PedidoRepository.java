@@ -36,8 +36,8 @@ public class Restaurante_PedidoRepository {
         restaurante_PedidoService = retrofit.create(Restaurante_PedidoService.class);
     }
 
-    public void searchRestaurantePedidoByEmpresa(int idEmpresa){
-        restaurante_PedidoService.searchRestaurantePedidoByEmpresa(idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
+    public void searchRestaurantePedidoByEmpresa(String token,int idEmpresa){
+        restaurante_PedidoService.searchRestaurantePedidoByEmpresa(token,idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
             @Override
             public void onResponse(Call<GsonRestaurante_Pedido> call, Response<GsonRestaurante_Pedido> response) {
                 if(response.code()==200 && response.body()!=null){
@@ -46,7 +46,7 @@ public class Restaurante_PedidoRepository {
 
                 }else{
 
-                    gsonRestaurante_PedidoMutableLiveData.postValue(new GsonRestaurante_Pedido());
+                    gsonRestaurante_PedidoMutableLiveData.postValue(null);
 
                 }
 
@@ -63,8 +63,8 @@ public class Restaurante_PedidoRepository {
 
     }
 
-    public void searchRestaurantePedidoByEmpresaProces(int idEmpresa){
-        restaurante_PedidoService.searchRestaurantePedidoByEmpresaProces(idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
+    public void searchRestaurantePedidoByEmpresaProces(String token,int idEmpresa){
+        restaurante_PedidoService.searchRestaurantePedidoByEmpresaProces(token,idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
             @Override
             public void onResponse(Call<GsonRestaurante_Pedido> call, Response<GsonRestaurante_Pedido> response) {
                 if(response.code()==200 && response.body()!=null){
@@ -72,7 +72,7 @@ public class Restaurante_PedidoRepository {
                     gsonRestaurante_PedidoMutableLiveData.postValue(response.body());
                 }else{
 
-                    gsonRestaurante_PedidoMutableLiveData.postValue(new GsonRestaurante_Pedido());
+                    gsonRestaurante_PedidoMutableLiveData.postValue(null);
 
                 }
             }
@@ -86,8 +86,8 @@ public class Restaurante_PedidoRepository {
 
     }
 
-    public void searchRestaurantePedidoByEmpresaReady(int idEmpresa){
-        restaurante_PedidoService.searchRestaurantePedidoByEmpresaReady(idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
+    public void searchRestaurantePedidoByEmpresaReady(String token,int idEmpresa){
+        restaurante_PedidoService.searchRestaurantePedidoByEmpresaReady(token,idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
             @Override
             public void onResponse(Call<GsonRestaurante_Pedido> call, Response<GsonRestaurante_Pedido> response) {
                 if(response.code()==200 && response.body()!=null){
@@ -95,7 +95,7 @@ public class Restaurante_PedidoRepository {
                     gsonRestaurante_PedidoMutableLiveData.setValue(response.body());
                 }else{
 
-                    gsonRestaurante_PedidoMutableLiveData.postValue(new GsonRestaurante_Pedido());
+                    gsonRestaurante_PedidoMutableLiveData.postValue(null);
 
                 }
             }
@@ -109,8 +109,8 @@ public class Restaurante_PedidoRepository {
 
     }
 
-    public void searchRestaurantePedidoByEmpresaHistorial(int idEmpresa){
-        restaurante_PedidoService.searchRestaurantePedidoByEmpresaHistorial(idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
+    public void searchRestaurantePedidoByEmpresaHistorial(String token,int idEmpresa){
+        restaurante_PedidoService.searchRestaurantePedidoByEmpresaHistorial(token,idEmpresa).enqueue(new Callback<GsonRestaurante_Pedido>() {
             @Override
             public void onResponse(Call<GsonRestaurante_Pedido> call, Response<GsonRestaurante_Pedido> response) {
                 if(response.code()==200 && response.body()!=null){
@@ -118,7 +118,7 @@ public class Restaurante_PedidoRepository {
                     gsonRestaurante_PedidoMutableLiveData.setValue(response.body());
                 }else{
 
-                    gsonRestaurante_PedidoMutableLiveData.postValue(new GsonRestaurante_Pedido());
+                    gsonRestaurante_PedidoMutableLiveData.postValue(null);
 
                 }
             }

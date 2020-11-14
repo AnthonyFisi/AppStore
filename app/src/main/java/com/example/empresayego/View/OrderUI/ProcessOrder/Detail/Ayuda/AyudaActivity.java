@@ -1,6 +1,7 @@
 package com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.app.Activity;
@@ -10,30 +11,44 @@ import android.os.Bundle;
 
 import com.example.empresayego.R;
 import com.example.empresayego.Repository.Modelo.Restaurante_Pedido;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.CancelarPedidoActivity;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.EliminarFragment;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementPrice.IncrementPriceActivity;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementPrice.IncrementPriceFragment;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeActivity;
+import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeFragment;
 
-public class AyudaActivity extends AppCompatActivity implements  IncrementTiemFragment.OnDataPass,EliminarFragment.OnDataPassEliminar{
+public class AyudaActivity extends AppCompatActivity {//implements  IncrementTimeFragment.OnDataPass, EliminarFragment.OnDataPassEliminar, IncrementPriceFragment.OnDataPassPrice{
 
     public final static String RESTAURANTE_PEDIDO_AYUDA="com.example.empresayego.View.OrderUI.NewOrder.Detail.RestauranteObjeto";
 
     public final static String POSITION_AYUDA="com.example.empresayego.View.OrderUI.NewOrder.Detail.posicion";
 
-    public final static String POSITION_COUNT="com.example.empresayego.View.OrderUI.NewOrder.Detail.posicionCount";
-
-    private int positionCount;
 
     private Restaurante_Pedido mRestaurante_pedido;
 
     private int position;
 
-    private boolean eliminar=false;
-
 
     private CardView activity_ayuda_DEMORAR_PEDIDO,activity_ayuda_AUMENTAR_PRECIO,activity_ayuda_CANCELAR_PEDIDO,activity_ayuda_CONTACTAR_EMPRESA;
+
+    private Intent returnIntent ;
+
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ayuda);
+        returnIntent = new Intent();
+        bundle= new Bundle();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v->{
+            onBackPressed();
+        });
         reciveDataIntent();
         declararWidget();
 
@@ -49,25 +64,34 @@ public class AyudaActivity extends AppCompatActivity implements  IncrementTiemFr
 
         activity_ayuda_DEMORAR_PEDIDO.setOnClickListener( v->{
 
-            IncrementTiemFragment addPhotoBottomDialogFragment =
-                    IncrementTiemFragment.newInstance(mRestaurante_pedido);
+            Intent intent= IncrementTimeActivity.newIntentIncrementTimeActivity(this,mRestaurante_pedido);
+            startActivity(intent);
+           /* IncrementTimeFragment addPhotoBottomDialogFragment =
+                    IncrementTimeFragment.newInstance(mRestaurante_pedido);
             addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                    IncrementTiemFragment.TAG);
+                    IncrementTimeFragment.TAG);*/
 
         });
 
         activity_ayuda_AUMENTAR_PRECIO.setOnClickListener( v->{
-            IncrementTiemFragment1 addPhotoBottomDialogFragment =
-                    IncrementTiemFragment1.newInstance(mRestaurante_pedido);
+            /*IncrementPriceFragment addPhotoBottomDialogFragment =
+                    IncrementPriceFragment.newInstance(mRestaurante_pedido);
             addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                    IncrementTiemFragment1.TAG);
+                    IncrementPriceFragment.TAG);*/
+            Intent intent= IncrementPriceActivity.newIntentIncrementPriceActivity(this,mRestaurante_pedido);
+            startActivity(intent);
         });
 
         activity_ayuda_CANCELAR_PEDIDO.setOnClickListener(v->{
+
+            Intent intent= CancelarPedidoActivity.newIntentCancelarPedidoActivity(this,mRestaurante_pedido);
+            startActivity(intent);
+
+            /*
             EliminarFragment addPhotoBottomDialogFragment =
                     EliminarFragment.newInstance(mRestaurante_pedido);
             addPhotoBottomDialogFragment.show(getSupportFragmentManager(),
-                    IncrementTiemFragment1.TAG);
+                    IncrementPriceFragment.TAG);*/
         });
 
 
@@ -82,22 +106,22 @@ public class AyudaActivity extends AppCompatActivity implements  IncrementTiemFr
             position=getIntent().getIntExtra(POSITION_AYUDA,100000);
         }
 
-        if(getIntent().getSerializableExtra(POSITION_COUNT) !=null){
+        /*if(getIntent().getSerializableExtra(POSITION_COUNT) !=null){
             positionCount=getIntent().getIntExtra(POSITION_COUNT,100000);
-        }
+        }*/
 
 
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " el objeto llego  y la possicion " + position +" ##");
+        System.out.println( mRestaurante_pedido.getNombre() + " el objeto llego  y la possicion " + position +" ##");
 
     }
 
 
 
-    public static Intent newIntentOrderProcesDetail(Context context, Restaurante_Pedido restaurante_pedido, int position,int positionCount){
+    public static Intent newIntentOrderProcesDetail(Context context, Restaurante_Pedido restaurante_pedido, int position){
         Intent intent= new Intent(context, AyudaActivity.class);
         intent.putExtra(RESTAURANTE_PEDIDO_AYUDA,restaurante_pedido);
         intent.putExtra(POSITION_AYUDA,position);
-        intent.putExtra(POSITION_COUNT,positionCount);
+      //  intent.putExtra(POSITION_COUNT,positionCount);
         return intent;
     }
 
@@ -110,31 +134,42 @@ public class AyudaActivity extends AppCompatActivity implements  IncrementTiemFr
     }
 
 
-    private void returnData(boolean updateTime,int tiempo,boolean eliminar){
+    private void returnData(){
 
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " los datos estan retornando del FRAGMENT INCREMENTTIME" + position +" ##");
+        System.out.println( mRestaurante_pedido.getNombre() + " los datos estan retornando del FRAGMENT INCREMENTTIME" + position +" ##");
 
-        Intent returnIntent = new Intent();
-        Bundle bundle= new Bundle();
-        bundle.putBoolean("updateTime",updateTime);
+
+       // bundle.putBoolean("updateTime",updateTime);
         bundle.putInt("position",position);
-        bundle.putInt("positionCount",positionCount);
+        //bundle.putInt("positionCount",positionCount);
         bundle.putSerializable("objeto",mRestaurante_pedido);
-        bundle.putInt("cantidadTiempo",tiempo);
-        bundle.putBoolean("eliminar",eliminar);
+       // bundle.putInt("cantidadTiempo",tiempo);
+        //bundle.putBoolean("eliminar",eliminar);
 
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK,returnIntent);
     }
 
-
+/*
     @Override
     public void onDataPass(boolean agregar,int tiempo) {
-        returnData(agregar,tiempo,false);
+        bundle.putBoolean("updateTime",agregar);
+        bundle.putInt("cantidadTiempo",tiempo);
+        returnData();
     }
 
     @Override
-    public void onDataPassEliminar(boolean agregar, int tiempo) {
-        returnData(false,tiempo,agregar);
+    public void onDataPassEliminar(boolean agregar) {
+
+        bundle.putBoolean("eliminar",agregar);
+        returnData();
     }
+
+    @Override
+    public void onDataPassIncrementPrice(boolean aumentar_precio, float cantidad) {
+        bundle.putFloat("priceTotal",cantidad);
+        bundle.putBoolean("price",aumentar_precio);
+        returnData();
+
+    }*/
 }

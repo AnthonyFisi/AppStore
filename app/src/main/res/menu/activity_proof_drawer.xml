@@ -3,36 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
+
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/navigation_list_new_orders"
+            android:icon="@drawable/boleto"
+            android:title="@string/inicio"/>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_data_empresa"
+            android:icon="@drawable/tienda"
+            android:title="@string/empresa" />
+        <item
+            android:id="@+id/nav_producto"
+            android:icon="@drawable/caja"
             android:title="@string/menu_gallery" />
+
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_deuda"
+            android:icon="@drawable/dinero"
+            android:title="@string/menu_share" />
         <item
-            android:id="@+id/nav_tools"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/menu_tools" />
+            android:id="@+id/nav_soporte"
+            android:icon="@drawable/soporte"
+            android:title="@string/menu_soporte" />
+        <item
+            android:id="@+id/nav_cerrar_sesion"
+            android:icon="@drawable/salida"
+            android:title="@string/menu_cerrar_sesion" />
+
+
+
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_send" />
-        </menu>
-    </item>
 
 </menu>

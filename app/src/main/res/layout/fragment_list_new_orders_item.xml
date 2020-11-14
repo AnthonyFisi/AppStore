@@ -1,119 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <LinearLayout
-        android:layout_marginBottom="5dp"
-        android:id="@+id/linear_change_state"
-        android:padding="10dp"
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/green"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/linear_change_state"
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textColor="#FFFFFF"
-                android:text="Orden"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/fragment_home_item_orden_HORA_DE_LLEGADA"
-                android:text="8:00pm"
-                android:textStyle="bold"
-                android:gravity="end"
-                android:textSize="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/fragment_home_item_orden_NUMERO_ORDEN"
-                android:text="#1524678"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="150dp"
+            android:orientation="vertical">
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="250dp"
-                android:layout_height="match_parent">
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/fragment_home_item_orden_NOMBRE_CLIENTE"
-                    android:text="Nombre del cliente"
-                    android:textSize="20dp"
+                    android:text="Orden"
+                    android:textSize="24sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_HORA_DE_LLEGADA"
+                    android:text="8:00pm"
+                    android:textStyle="bold"
+                    android:gravity="end"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_NUMERO_ORDEN"
+                    android:text="#1524678"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent">
                     <TextView
-                        android:id="@+id/fragment_home_item_orden_CANTIDAD_PRODUCTOS"
-                        android:text=" cantidad"
-                        android:textSize="20dp"
+                        android:id="@+id/fragment_home_item_orden_NOMBRE_CLIENTE"
+                        android:text="Nombre del cliente"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                    <TextView
-                        android:textColor="#FFFFFF"
-                        android:layout_marginStart="10dp"
-                        android:text="productos"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/fragment_home_item_orden_CANTIDAD_PRODUCTOS"
+                            android:text=" cantidad"
+                            android:textSize="20sp"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
+                        <TextView
+                            android:textColor="@color/white"
+                            android:layout_marginStart="10dp"
+                            android:text="productos"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:text="S/."
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/fragment_home_item_orden_COSTO_TOTAL"
+                        android:text="Nuevo"
+                        android:textSize="25sp"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>
-
             </LinearLayout>
 
 
 
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:text="S/."
-                    android:textSize="20dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/fragment_home_item_orden_COSTO_TOTAL"
-                    android:text="Nuevo"
-                    android:textSize="25dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
         </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
 
 
-    </LinearLayout>
+
 </LinearLayout>

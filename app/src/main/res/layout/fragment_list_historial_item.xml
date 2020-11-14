@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/fecha_historial"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/dia_semana"
+            android:text="Lunes"
+            android:gravity="center"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_historial"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:id="@+id/linear_change_state"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_NUMERO_ORDEN"
+                    android:text="Orden #1524678"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_HORA_DE_LLEGADA"
+                    android:text="8:00pm"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="250dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/fragment_home_item_orden_NOMBRE_CLIENTE"
+                        android:text="Nombre del cliente"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/fragment_home_item_orden_CANTIDAD_PRODUCTOS"
+                            android:text=" cantidad"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:text="productos"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:padding="6dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:background="@drawable/mas"
+                            android:backgroundTint="@color/green"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"/>
+                        <TextView
+                            android:text="S/."
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="8dp"
+                            android:textColor="@color/green"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/fragment_home_item_orden_COSTO_TOTAL"
+                            android:text="200.00"
+                            android:textStyle="bold"
+                            android:textColor="@color/green"
+                            android:textSize="20sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>
+
+<!--
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginBottom="5dp"
+            android:id="@+id/linear_change_state"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_NUMERO_ORDEN"
+                    android:text="Mesa 14"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/fragment_home_item_orden_HORA_DE_LLEGADA"
+                    android:text="8:00pm"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="250dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/fragment_home_item_orden_NOMBRE_CLIENTE"
+                        android:text="Nombre del cliente"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/fragment_home_item_orden_CANTIDAD_PRODUCTOS"
+                            android:text=" cantidad"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginStart="10dp"
+                            android:text="productos"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        app:cardBackgroundColor="#F8D9DA"
+                        app:cardCornerRadius="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:padding="6dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:text="S/."
+                                android:textSize="20sp"
+                                android:textColor="#FE6256"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/fragment_home_item_orden_COSTO_TOTAL"
+                                android:text="200.00"
+                                android:textColor="#FE6256"
+                                android:textSize="20sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="wrap_content">
+
+
+
+            </LinearLayout>
+
+
+
+-->

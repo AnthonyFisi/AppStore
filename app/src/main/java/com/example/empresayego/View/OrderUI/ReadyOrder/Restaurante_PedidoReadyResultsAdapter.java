@@ -41,36 +41,41 @@ public class Restaurante_PedidoReadyResultsAdapter extends  RecyclerView.Adapter
     public void onBindViewHolder(@NonNull Restaurante_PedidoResultsHolder holder, int position) {
 
         Restaurante_Pedido restaurante_pedido=resultsFiltered.get(position);
-        holder. fragment_ready_order_item_NUMERO_ORDEN.setText("#"+restaurante_pedido.getIdempresa()+""+
-                restaurante_pedido.getIdpedido()+""+
-                restaurante_pedido.getIdventa());
 
-        holder. fragment_ready_order_item_NUMERO_ORDEN.setTextColor(Color.WHITE);
+        if(restaurante_pedido.getRepartidor_bi()!=null){
+            holder.linear_change_state.setVisibility(View.VISIBLE);
+            holder.fragment_ready_order_item_BUSCANDO_REPARTIDOR.setVisibility(View.GONE);
 
-        holder.fragment_ready_order_item_NOMBRE_DELIVERY.setText(restaurante_pedido.getNombre_repartidor());
-        holder. fragment_ready_order_item_NOMBRE_DELIVERY.setTextColor(Color.WHITE);
+        holder. fragment_ready_order_item_NUMERO_ORDEN.setText("#"+restaurante_pedido.getIdventa());
 
 
-        holder.fragment_ready_order_item_CODIGO_IDENTIFACION.setText("ID "+restaurante_pedido.getCodigo_repartidor());
-        holder. fragment_ready_order_item_CODIGO_IDENTIFACION.setTextColor(Color.WHITE);
+        holder.fragment_ready_order_item_NOMBRE_DELIVERY.setText(restaurante_pedido.getRepartidor_bi().getNombre_usuario());
+
+
+        holder.fragment_ready_order_item_CODIGO_IDENTIFACION.setText("ID "+restaurante_pedido.getRepartidor_bi().getIdrepartidor());
 
         String pattern = "hh:mm:ss a";
         DateFormat dateFormat = new SimpleDateFormat(pattern);
-        String fecha=dateFormat.format(restaurante_pedido.getVenta_fecha());
+        String fecha=dateFormat.format(restaurante_pedido.getVentafechaentrega());
 
 
 
         holder.fragment_ready_order_item_HORA_DE_LLEGADA.setText(fecha);
-        holder.fragment_ready_order_item_HORA_DE_LLEGADA.setTextColor(Color.WHITE);
 
 
-        if (restaurante_pedido.getImagen_repartidor()!= null) {
-            String imageUrl =restaurante_pedido.getImagen_repartidor()
+        if (restaurante_pedido.getRepartidor_bi().getFoto()!= null) {
+            String imageUrl =restaurante_pedido.getRepartidor_bi().getFoto()
                     .replace("http://", "https://");
 
             Glide.with(holder.itemView)
                     .load(imageUrl)
                     .into(holder.fragment_ready_order_item_IMAGEN_DELIVERY);
+        }
+
+        }else {
+            holder.linear_change_state.setVisibility(View.GONE);
+
+            holder.fragment_ready_order_item_BUSCANDO_REPARTIDOR.setVisibility(View.VISIBLE);
         }
     }
 
@@ -111,7 +116,8 @@ public class Restaurante_PedidoReadyResultsAdapter extends  RecyclerView.Adapter
         private TextView fragment_ready_order_item_NUMERO_ORDEN,fragment_ready_order_item_NOMBRE_DELIVERY,fragment_ready_order_item_CODIGO_IDENTIFACION,fragment_ready_order_item_HORA_DE_LLEGADA;
         private ImageView fragment_ready_order_item_IMAGEN_DELIVERY;
 
-        private LinearLayout linear_change_state;
+        private LinearLayout linear_change_state,fragment_ready_order_item_BUSCANDO_REPARTIDOR;
+
         public Restaurante_PedidoResultsHolder(@NonNull View itemView,ClickPedidoReciente clickPedidoReciente) {
             super(itemView);
             this.mClickPedidoReciente=clickPedidoReciente;
@@ -122,6 +128,8 @@ public class Restaurante_PedidoReadyResultsAdapter extends  RecyclerView.Adapter
             fragment_ready_order_item_HORA_DE_LLEGADA=itemView.findViewById(R.id.fragment_ready_order_item_HORA_DE_LLEGADA);
 
             linear_change_state=itemView.findViewById(R.id.linear_change_state);
+            fragment_ready_order_item_BUSCANDO_REPARTIDOR=itemView.findViewById(R.id.fragment_ready_order_item_BUSCANDO_REPARTIDOR);
+
             itemView.setOnClickListener(this);
 
         }

@@ -4,93 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".View.OrderUI.ProcessOrder.Detail.Ayuda.AyudaActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/transparent"
+        app:navigationIcon="@drawable/ic_back" />
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout21"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/activity_ayuda_DEMORAR_PEDIDO"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
+
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/ic_ayuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_ayuda"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     style="@style/ActivityAyudaStyle"
-                    android:text=" Aumentar tiempo de preparacion"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:ignore="VectorDrawableCompat" />
+                    android:layout_marginStart="10dp"
+                    android:text=" Aumentar tiempo de preparacion" />
+
             </LinearLayout>
 
 
         </androidx.cardview.widget.CardView>
 
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/activity_ayuda_AUMENTAR_PRECIO"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <LinearLayout
-                android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
-                android:orientation="horizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/ic_ayuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_ayuda"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     style="@style/ActivityAyudaStyle"
-
-                    android:text=" Aumenat o Disminuir precio el precio del pedido"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:ignore="VectorDrawableCompat" />
+                    android:layout_marginStart="10dp"
+                    android:text=" Aumenat o Disminuir precio el precio del pedido" />
+
             </LinearLayout>
 
 
@@ -99,39 +102,34 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/activity_ayuda_CANCELAR_PEDIDO"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <LinearLayout
-                android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
-                android:orientation="horizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/ic_ayuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_ayuda"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     style="@style/ActivityAyudaStyle"
-
-                    android:text=" Cancelar pedido"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:ignore="VectorDrawableCompat" />
+                    android:layout_marginStart="10dp"
+                    android:text=" Cancelar pedido" />
+
             </LinearLayout>
 
 
@@ -140,39 +138,34 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/activity_ayuda_CONTACTAR_EMPRESA"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="70dp">
-            <LinearLayout
-                android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp">
 
-                android:orientation="horizontal"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:padding="10dp"
-                    android:src="@drawable/ic_ayuda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_ayuda"
                     tools:ignore="VectorDrawableCompat" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     style="@style/ActivityAyudaStyle"
-
-                    android:text="Contactar con la empresa"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"/>
-
-                <ImageView
-                    android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:ignore="VectorDrawableCompat" />
+                    android:layout_marginStart="10dp"
+                    android:text="Contactar con la empresa" />
+
             </LinearLayout>
 
 

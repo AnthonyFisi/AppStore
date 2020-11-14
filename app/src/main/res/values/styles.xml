@@ -1,19 +1,37 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/original_color</item>
+        <item name="colorPrimaryDark">@color/original_color</item>
+        <item name="colorAccent">@color/original_color</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name= "android:textViewStyle" >@style/NovaTextViewStyle </item>
+        <item name= "android:buttonStyle" >@style/NovaButtonStyle </item>
     </style>
 
+
+    <style name="AppThemeProceso" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/original_color</item>
+        <item name="colorPrimaryDark">@color/original_color</item>
+        <item name="colorAccent">@color/original_color</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name= "android:textViewStyle" >@style/NovaTextViewStyle </item>
+        <item name= "android:buttonStyle" >@style/NovaButtonStyle </item>
+    </style>
 
     <style name="AppThemeProductDetail" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#556573</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name= "android:textViewStyle" >@style/NovaTextViewStyle </item>
+        <item name= "android:buttonStyle" >@style/NovaButtonStyle </item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,10 +40,20 @@
     </style>
 
     <style name="ButtonOrder">
-
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:background">#3BBF82</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/arimo</item>
+    </style>
+
+    <style name="Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/titulo</item>
     </style>
 
 
@@ -33,6 +61,22 @@
 
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="StylePromedio">
+        <item name="android:textColor">@color/titulo</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name= "NovaTextViewStyle" parent= "android:Widget.TextView" >
+        <item name= "android:fontFamily" > @font/proxima_nova_alt_light </item>
+    </style>
+    <style name= "NovaButtonStyle" parent= "android:Widget.Holo.Button" >
+        <item name= "android:fontFamily" > @font/proxima_nova_alt_light </item>
+    </style>
+
+    <style name= "NovaProgressBar" parent= "android:Widget.Holo.ProgressBar" >
+        <item name= "android:indeterminateTint" > @font/proxima_nova_alt_light </item>
     </style>
 
 

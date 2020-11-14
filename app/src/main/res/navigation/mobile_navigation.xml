@@ -3,60 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_list_new_orders">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_list_new_orders"
         android:name="com.example.empresayego.View.OrderUI.NewOrder.ListNewOdersFragment"
         android:label="@string/title_new_order"
         tools:layout="@layout/fragment_list_new_orders" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_proces_orders"
         android:name="com.example.empresayego.View.OrderUI.ProcessOrder.ProcesOrderFragment"
         android:label="@string/title_proceso"
         tools:layout="@layout/fragment_proces_orders" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_ready_order"
         android:name="com.example.empresayego.View.OrderUI.ReadyOrder.ReadyOrderFragment"
         android:label="@string/title_ready"
         tools:layout="@layout/fragment_ready_order" />
 
-
-
-
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_producto"
         android:name="com.example.empresayego.View.DrawerUI.productos.ProductoFragment"
-        android:label="GalleryFragment"
+        android:label="ProductoFragment"
         tools:layout="@layout/fragment_producto" />
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.empresayego.View.DrawerUI.home.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_deuda"
+        android:name="com.example.empresayego.View.DrawerUI.deuda.DeudaFragment"
+        android:label="DeudaFragment"
+        tools:layout="@layout/fragment_deuda" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.empresayego.View.DrawerUI.send.SendFragment"
+        android:id="@+id/nav_historial"
+        android:name="com.example.empresayego.View.DrawerUI.historial.HistorialFragment"
         android:label="SendFragment"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_historial" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.empresayego.View.DrawerUI.share.ShareFragment"
-        android:label="fragment_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_data_empresa"
+        android:name="com.example.empresayego.View.DrawerUI.dataEmpresa.DataEmpresaFragment"
+        android:label="fragment_data_empresa"
+        tools:layout="@layout/fragment_data_empresa" />
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.empresayego.View.DrawerUI.tools.ToolsFragment"
-        android:label="fragment_tools"
+        android:id="@+id/nav_cerrar_sesion"
+        android:name="com.example.empresayego.View.DrawerUI.cerrar_sesion.CerrarSesionFragment"
+        android:label="fragment_cerrar_sesion"
         tools:layout="@layout/fragment_tools" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.empresayego.View.DrawerUI.slideshow.SlideshowFragment"
-        android:label="fragment_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_soporte"
+        android:name="com.example.empresayego.View.DrawerUI.soporte.SoporteFragment"
+        android:label="fragment_soporte"
+        tools:layout="@layout/fragment_soporte" />
+
 </navigation>

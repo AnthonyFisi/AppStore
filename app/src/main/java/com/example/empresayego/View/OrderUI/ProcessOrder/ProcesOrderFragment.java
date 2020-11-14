@@ -1,5 +1,6 @@
 package com.example.empresayego.View.OrderUI.ProcessOrder;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,16 +8,21 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.empresayego.Login.Main;
 import com.example.empresayego.MainActivity;
 import com.example.empresayego.R;
 import com.example.empresayego.Repository.Modelo.Empresa;
@@ -25,9 +31,15 @@ import com.example.empresayego.Repository.Modelo.Orden_estado_restaurante;
 import com.example.empresayego.Repository.Modelo.Orden_estado_restaurantePK;
 import com.example.empresayego.Repository.Modelo.Restaurante_Pedido;
 import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity;
+import com.example.empresayego.View.ProcesoOrdenActivity;
 import com.example.empresayego.ViewModel.Orden_estado_restauranteViewModel;
 import com.example.empresayego.ViewModel.Restaurante_PedidoViewModel;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.pusher.client.channel.SubscriptionEventListener;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -45,23 +57,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoProcesResultsAdapter.ClickPedidoReciente {
+public class ProcesOrderFragment extends Fragment implements  Restaurante_PedidoProcesResultsAdapter.ClickPedidoReciente{
 
     private final static int CODE=2;
 
     private Restaurante_PedidoViewModel viewModel;
     private Orden_estado_restauranteViewModel viewModel2;
     private Restaurante_PedidoProcesResultsAdapter adapter;
-    private LinearLayout imagen;
-    private TextView mensaje;
+   // private LinearLayout imagen;
+   // private TextView mensaje,update_pedido;
+
+   // private TextView update_pedido;
+
     private   RecyclerView recyclerView;
     private SearchView searchView;
 
-    private int positionCount;
+   // private int positionCount;
 
     private boolean eliminar=false;
 
-    private List<Restaurante_Pedido> listaUpdateSate=new ArrayList<>();
+    private List<Restaurante_Pedido> listaUpdateSate;
 
     private boolean data=false;
 
@@ -69,25 +84,38 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
 
     private boolean agregar=false;
 
-    private boolean respuestaChangeTime=false;
+    private boolean respuestaChangeTime;
 
 
     private int position=1000;
 
-    private Restaurante_Pedido mRestaurante_pedido=new Restaurante_Pedido();
+    private Restaurante_Pedido mRestaurante_pedido;
 
-    private boolean updateTime=false;
+    private boolean updateTime,price;
 
     private int cantidadTiempo=0;
 
+    private List<Restaurante_Pedido> listaNewData;
 
+    private LinearLayout pedidos_preparandose_empty;
+
+    private ProgressBar progres;
+
+    private float priceTotal;
+
+    private String fechaServidor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        updateTime=false;
+        listaNewData= new ArrayList<>();
+        listaUpdateSate=new ArrayList<>();
+        respuestaChangeTime=false;
 
-       Restaurante_PedidoProcesResultsAdapter.cancelAllTimers2();
-       MainActivity.lista.clear();
+       Restaurante_PedidoProcesResultsAdapter.cancelAllTimers();
+       //MainActivity.lista.clear();
+        ProcesoOrdenActivity.countDownMap.clear();
 
         adapter = new Restaurante_PedidoProcesResultsAdapter();
         viewModel = ViewModelProviders.of(this).get(Restaurante_PedidoViewModel.class);
@@ -95,23 +123,32 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
         viewModel.getRestaurante_PedidoLiveData().observe(this, new Observer<GsonRestaurante_Pedido>() {
             @Override
             public void onChanged(GsonRestaurante_Pedido gsonRestaurante_pedido) {
+
+                progres.setVisibility(View.GONE);
                 if(gsonRestaurante_pedido !=null){
-                    if(gsonRestaurante_pedido.getListaRestaurante_Pedido() !=null){
 
-                        List<Restaurante_Pedido> lista=new ArrayList<>();
+                    adapter.setResults(gsonRestaurante_pedido.getListaRestaurante_Pedido(), ProcesOrderFragment.this,getContext());
 
-                        for(Restaurante_Pedido data:gsonRestaurante_pedido.getListaRestaurante_Pedido()){
-                           if(updateStateReady(data)){
-                                listaUpdateSate.add(data);
-                            }else{
+                    ProcesoOrdenActivity.lista=gsonRestaurante_pedido.getListaRestaurante_Pedido();
+                    for (int i = 0,length = ProcesoOrdenActivity.countDownMap.size(); i < length; i++) {
 
-                               MainActivity.lista.add(data);
-                                lista.add(data);
-                            }
-                        }
-          adapter.setResults(lista, ProcesOrderFragment.this);
-                        data=true;
+                            CountDownTimer cdt = ProcesoOrdenActivity.countDownMap.get(ProcesoOrdenActivity.countDownMap.keyAt(i));
+
+                            cdt.cancel();
+
+
+                            ProcesoOrdenActivity.countDownMap.remove(ProcesoOrdenActivity.countDownMap.keyAt(i));
+
+                            Log.e("TAG",  "ID  :  " + ProcesoOrdenActivity.countDownMap.keyAt(i) +" valor "+ProcesoOrdenActivity.countDownMap.get(ProcesoOrdenActivity.countDownMap.keyAt(i)));
+
+
                     }
+
+                    System.out.println("TAMANO DEL COUNTER "+ProcesoOrdenActivity.countDownMap.size());
+
+                }else {
+
+                    pedidos_preparandose_empty.setVisibility(View.VISIBLE);
 
                 }
 
@@ -135,12 +172,10 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
             }
         });
 
-        if(Empresa.sEmpresa.isDisponible()){
-            AsyncTaskRunner runner = new AsyncTaskRunner();
-            runner.execute("3");
-        }
+
 
     }
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -148,15 +183,39 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
 
 
         View root = inflater.inflate(R.layout.fragment_proces_orders, container, false);
-        imagen=root.findViewById(R.id.imagen);
+
+        pedidos_preparandose_empty=root.findViewById(R.id.pedidos_preparandose_empty);
+        progres=root.findViewById(R.id.progres);
+
+
+      /*  imagen=root.findViewById(R.id.imagen);
         mensaje=root.findViewById(R.id.mensaje);
+        */
+
+    //    update_pedido=root.findViewById(R.id.update_pedido);
         recyclerView=root.findViewById(R.id.fragment_restaurante_ordenProces);
-        seachOrder(root);
+        //seachOrder(root);
 
         whiteNotificationBar(recyclerView);
-        imagen.setVisibility(View.GONE);
-        mensaje.setVisibility(View.GONE);
+     /*   imagen.setVisibility(View.GONE);
+        mensaje.setVisibility(View.GONE);*/
+        funPusher();
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
+
+
+        if(Empresa.sEmpresa.isDisponible()){
+            progres.setVisibility(View.VISIBLE);
+            viewModel.searchRestaurantePedidoByEmpresaProces(Empresa.sEmpresa.getIdempresa());
+
+
+        }
+
+
+
+        //setOnclickUpdate();
+
         return root;
     }
 
@@ -169,31 +228,23 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
         if (requestCode == CODE) {
             if(resultCode == Activity.RESULT_OK){
 
-                // ProductoService producto=(ProductoService) data.getSerializableExtra("data");
-                //agregar= data.getBooleanExtra("agregar",false);
+
                 Bundle bundle= data.getExtras();
                 agregar=bundle.getBoolean("agregar");
                 position=bundle.getInt("position");
                 mRestaurante_pedido=(Restaurante_Pedido) bundle.getSerializable("objeto");
-                positionCount=bundle.getInt("positionCount");
+                //positionCount=bundle.getInt("positionCount");
                 updateTime=bundle.getBoolean("updateTime");
                 cantidadTiempo=bundle.getInt("cantidadTiempo");
 
                 eliminar=bundle.getBoolean("eliminar");
 
-                if(updateTime){
-                    System.out.println("LLEGO EL TIEMPO MODIFICADO");
 
 
-                }else {
+                priceTotal=bundle.getFloat("priceTotal");
+                price=bundle.getBoolean("price");
 
-                    System.out.println("NO LLEGO EL TIEMPO");
-
-                }
-
-
-
-                System.out.println( mRestaurante_pedido.getUsuario_nombre() + " LOS DATOS LLEGARON " + position +" ##");
+                fechaServidor=bundle.getString("fechaServidor");
 
 
 
@@ -209,90 +260,27 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
     public void onResume() {
         super.onResume();
 
-
-        if(eliminar){
-            adapter.cancelAllTimers2();
-            adapter.clear();
-
-
-
-            MainActivity.lista.remove(position);
-
-
-
-            adapter.setResults(MainActivity.lista,ProcesOrderFragment.this);
-
-
-            eliminar=false;
-
-        }
-
-
         if(agregar){
-            //adapter.removeItem(mRestaurante_pedido,position);
 
+            /*eliminarObject(mRestaurante_pedido);
+            Restaurante_PedidoProcesResultsAdapter.cancelAllTimers();
+            ProcesoOrdenActivity.countDownMap.clear();
 
-            adapter.cancelAllTimers2();
-            adapter.clear();
-
-
-
-            MainActivity.lista.remove(position);
+            adapter.addResults2(ProcesoOrdenActivity.lista,ProcesOrderFragment.this);
 
 
 
-            adapter.setResults(MainActivity.lista,ProcesOrderFragment.this);
+            adapter.setResults(ProcesoOrdenActivity.lista,ProcesOrderFragment.this,getContext());*/
 
+            adapter.removeItem(mRestaurante_pedido,fechaServidor);
 
+            //adapter.notifyItemRemoved(posicion);
+
+            if(adapter.resultsSize()<=0){
+                pedidos_preparandose_empty.setVisibility(View.VISIBLE);
+            }
 
             agregar=false;
-
-        }
-
-        if(updateTime){
-
-            if (adapter != null) {
-
-               // adapter.cancelAllTimers(positionCount,cantidadTiempo);
-                adapter.cancelAllTimers2();
-                adapter.clear();
-                //adapter.modified(cantidadTiempo,mRestaurante_pedido.getIdventa());
-
-
-                List<Restaurante_Pedido> provisional=new ArrayList<>();
-
-                for(Restaurante_Pedido pedido:MainActivity.lista){
-
-                    if(mRestaurante_pedido.getIdventa()==pedido.getIdventa()){
-
-                        int restante=tiempoRestante(pedido);
-                        int nuevaCantidad=cantidadTiempo + restante;
-
-                        pedido.setTiempo_espera(String.valueOf(nuevaCantidad));
-                    }
-
-                    provisional.add(pedido);
-
-                }
-
-                for(Restaurante_Pedido pedido:MainActivity.lista){
-                    System.out.println(pedido.getIdventa()  + " --- LLENANDO OTRA VEZ ");
-                }
-
-
-                    adapter.setResults(provisional,ProcesOrderFragment.this);
-
-
-                updateTime=false;
-
-               /* adapter.clear();
-
-                AsyncTaskRunner runner = new AsyncTaskRunner();
-                runner.execute("3");
-
-                updateTime=false;*/
-
-            }
         }
 
 
@@ -302,245 +290,11 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
     @Override
     public void onPause() {
         super.onPause();
-        MainActivity.dataEmpty=true;
-
-    }
-
-    @Override
-    public void clickPedido(Restaurante_Pedido restaurante_pedido, int posisiton,int positionCount) {
-        Toast.makeText(getContext(),"position " +  posisiton,Toast.LENGTH_SHORT).show();
-        Intent intent= ProcesOrderActivity.newIntentOrderProcesDetail(getContext(),restaurante_pedido, posisiton,positionCount);
-        startActivityForResult(intent,CODE);
-        System.out.println(restaurante_pedido.getListaProductos());
-
-    }
-
-    @Override
-    public void updateStateToReadyOrder(Restaurante_Pedido pedido,int position) {
-
-
-        if(adapter.searchObject(pedido)){
-
-
-        Orden_estado_restaurantePK pk =new Orden_estado_restaurantePK();
-        pk.setIdventa(pedido.getIdventa());
-        pk.setIdestado_venta(3);
-        Orden_estado_restaurante ordenEstado=new Orden_estado_restaurante();
-        ordenEstado.setId(pk);
-        ordenEstado.setFecha(null);
-        ordenEstado.setDetalle("");
-
-
-        int restante=tiempoRestante(pedido);
-            System.out.println("EL TIEMPO RESTANTE ES" + restante);
-
-        int tiempo=Integer.valueOf(pedido.getTiempo_espera());
-
-            System.out.println("EL TIEMPO TOTAL ES " + restante);
-
-
-
-
-            viewModel2.updateEstadoProces(ordenEstado,pedido.getIdusuario());
-
-
-            if(adapter.resultsSize()==0){
-                imagen.setVisibility(View.VISIBLE);
-                mensaje.setVisibility(View.VISIBLE);
-
-            }
-
-        }
     }
 
 
 
-
-
-    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
-
-        private String resp;
-        ProgressDialog progressDialog;
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            if(adapter.getList().size()==0){
-
-                int idEmpresa = 23;
-                viewModel.searchRestaurantePedidoByEmpresaProces(idEmpresa);
-            }
-         publishProgress("Sleeping..."); // Calls onProgressUpdate()
-            try {
-                int time = Integer.parseInt(params[0])*1000;
-
-                Thread.sleep(time);
-                resp = "Slept for " + params[0] + " seconds";
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                resp = e.getMessage();
-            } catch (Exception e) {
-                e.printStackTrace();
-                resp = e.getMessage();
-            }
-            return resp;
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            // execution of result of Long time consuming operation
-            progressDialog.dismiss();
-            //finalResult.setText(result);
-
-            if(data){
-                System.out.println("ENTRA POR ACA O NO");
-                imagen.setVisibility(View.GONE);
-                mensaje.setVisibility(View.GONE);
-
-                System.out.println(adapter.getList().size()+"CANTIDAD DE LA LISTA ADPATER");
-
-                recyclerView.setAdapter(adapter);
-
-
-            }else{
-                System.out.println("nunaaaaaaaaaaaENTRA POR ACA O NO");
-                imagen.setVisibility(View.VISIBLE);
-                mensaje.setVisibility(View.VISIBLE);
-            }
-
-
-            System.out.println(" adapter size" + adapter.getList().size());
-
-            for(Restaurante_Pedido p:listaUpdateSate){
-
-                Orden_estado_restaurantePK pk=new Orden_estado_restaurantePK();
-                pk.setIdventa(p.getIdventa());
-                pk.setIdestado_venta(3);
-
-                Orden_estado_restaurante estado= new Orden_estado_restaurante();
-                estado.setId(pk);
-                estado.setDetalle("");
-                estado.setFecha(null);
-
-                //adapter.cancelAllTimers();
-
-                viewModel2.updateEstadoReady(estado,p.getIdusuario());
-            }
-
-
-        }
-
-
-        @Override
-        protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(getContext(),
-                    "ProgressDialog",
-                    "Wait for "+5+ " seconds");
-        }
-
-
-        @Override
-        protected void onProgressUpdate(String... text) {
-            //  finalResult.setText(text[0]);
-
-        }
-    }
-
-
-
-
-    private boolean updateStateReady (Restaurante_Pedido pedido){
-
-        boolean respuesta=false;
-
-        Timestamp ts = Timestamp.valueOf(pedido.getCodigo_repartidor());
-
-        String pattern = "HH:mm:ss";
-        DateFormat dateFormat = new SimpleDateFormat(pattern);
-        String time1=dateFormat.format(ts);
-
-
-
-
-
-        DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        String time2 = dateFormat2.format(date);
-
-
-
-        System.out.println("dateformated  " +time1+" |  fecha1 "+time2);
-
-
-
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Date date1 = null;
-        Date date2 =null;
-        try {
-            date1 = format.parse(time1);
-            date2=format.parse(time2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        long difference = date2.getTime() - date1.getTime();
-
-        Long tiempoTotal= new Long(Integer.valueOf(pedido.getTiempo_espera())*60000);
-
-
-        if((difference)>=tiempoTotal) {
-            respuesta=true;
-        }
-
-
-        return respuesta;
-
-    }
-
-    private int tiempoRestante(Restaurante_Pedido pedido){
-
-
-        Timestamp ts = Timestamp.valueOf(pedido.getCodigo_repartidor());
-
-        String pattern = "HH:mm:ss";
-        DateFormat dateFormat = new SimpleDateFormat(pattern);
-        String time1=dateFormat.format(ts);
-
-
-
-
-
-        DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        String time2 = dateFormat2.format(date);
-
-
-
-        System.out.println("dateformated  " +time1+" |  fecha1 "+time2);
-
-
-
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-        Date date1 = null;
-        Date date2 =null;
-        try {
-            date1 = format.parse(time1);
-            date2=format.parse(time2);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        long difference = date2.getTime() - date1.getTime();
-
-        int tiempo=(int)(difference/60000);
-
-        return tiempo;
-
-
-    }
-
-    private void seachOrder(View view){
+   /* private void seachOrder(View view){
 
         // Associate searchable configuration with the SearchView
         //SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -565,7 +319,7 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
                 return false;
             }
         });
-    }
+    }*/
 
 
     private void whiteNotificationBar(View view) {
@@ -579,5 +333,136 @@ public class ProcesOrderFragment extends Fragment implements Restaurante_PedidoP
 
 
 
+
+    private void funPusher(){
+        ProcesoOrdenActivity.channel_proces.bind("my-event", new SubscriptionEventListener() {
+            @Override
+            public void onEvent(String channelName, String eventName, final String data) {
+                System.out.println(data+"los datossssssssssssssssss 852");
+
+                if(getActivity() !=null){
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try{
+
+                                JsonParser parser = new JsonParser();
+                                JsonElement mJson =  parser.parse(data);
+                                Gson gson = new Gson();
+                                Restaurante_Pedido object = gson.fromJson(mJson, Restaurante_Pedido.class);
+                                listaNewData.add(object);
+                                //update_pedido.setText("Tienes " + listaNewData.size() + " pedidos nuevos");
+                                //update_pedido.setVisibility(View.VISIBLE);
+
+
+
+                                recyclerView.setVisibility(View.VISIBLE);
+
+                                pedidos_preparandose_empty.setVisibility(View.GONE);
+
+                                for(Restaurante_Pedido pedido:listaNewData){
+                                    adapter.addResults(pedido,ProcesOrderFragment.this,pedido.getHoraservidor());
+                                }
+
+                                listaNewData.clear();
+
+                                //update_pedido.setVisibility(View.GONE);
+
+
+                            }catch (Exception e){
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                    });
+                }
+
+            }
+        });
+        ProcesoOrdenActivity.pusher.connect();
+    }
+
+
+  /*  private void setOnclickUpdate(){
+        update_pedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                recyclerView.setVisibility(View.VISIBLE);
+
+                pedidos_preparandose_empty.setVisibility(View.GONE);
+
+              /*  ProcesoOrdenActivity.lista.addAll(listaNewData);
+
+                updateFechaServidor(listaNewData.get(0).getHoraservidor());
+
+                Restaurante_PedidoProcesResultsAdapter.cancelAllTimers();
+                ProcesoOrdenActivity.countDownMap.clear();
+
+                adapter.addResults2(ProcesoOrdenActivity.lista,ProcesOrderFragment.this);
+
+                for(Restaurante_Pedido pedido:listaNewData){
+                    System.out.println(pedido.getIdventa()+" id del pedido");
+                    adapter.addResults(pedido,ProcesOrderFragment.this);
+                }
+
+                listaNewData.clear();
+
+                update_pedido.setVisibility(View.GONE);
+
+
+            }
+        });
+    }
+*/
+
+
+
+    @Override
+    public void clickPedido(Restaurante_Pedido restaurante_pedido, int posisiton) {
+
+            Intent intent= ProcesOrderActivity.newIntentOrderProcesDetail(getContext(),restaurante_pedido, posisiton);
+            startActivityForResult(intent,CODE);
+            System.out.println(restaurante_pedido.getListaProductos());
+
+
+        Toast.makeText(getContext(),"position " +  posisiton,Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void eliminarObject(Restaurante_Pedido restaurante_pedido){
+        int posicion=0;
+        int count=0;
+        for(Restaurante_Pedido pedido:ProcesoOrdenActivity.lista){
+
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            Date d = null;
+            try {
+                d = formatter.parse(fechaServidor);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            pedido.setHoraservidor(Timestamp.valueOf(formatter.format(d)));
+
+
+            if(restaurante_pedido.getIdventa()==pedido.getIdventa()){
+                posicion=count;
+            }
+            count++;
+        }
+
+        ProcesoOrdenActivity.lista.remove(posicion);
+
+    }
+
+    private void updateFechaServidor(Timestamp fechaServidor){
+        for(Restaurante_Pedido pedido:ProcesoOrdenActivity.lista){
+            pedido.setHoraservidor(fechaServidor);
+
+        }
+    }
 
 }

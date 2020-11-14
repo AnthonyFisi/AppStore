@@ -278,10 +278,6 @@ public class DisplayActivity extends FragmentActivity implements OnMapReadyCallb
         // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters+API_KEY;
 
-
-        /*String m=
-                "https://maps.googleapis.com/maps/api/directions/json?origin=-12.1689212,-76.9275876&detination=-12.1690929,-76.9277597&key=AIzaSyAovb3NQYJdlU_a8SwdrWIe2cj-e2NWOmM"
-*/
         return url;
     }
 

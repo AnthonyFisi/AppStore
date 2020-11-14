@@ -13,7 +13,7 @@
         android:layout_height="80dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
+        app:layout_constraintBottom_toTopOf="@+id/linearlayout_informacion_historial"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout11"
+        android:id="@+id/linearlayout_informacion_historial"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:background="#FFFFFF"
@@ -159,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout11"
+        app:layout_constraintTop_toBottomOf="@+id/linearlayout_informacion_historial"
         android:orientation="horizontal" />
 
 

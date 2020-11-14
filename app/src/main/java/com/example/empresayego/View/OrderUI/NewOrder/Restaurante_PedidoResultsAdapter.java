@@ -22,7 +22,6 @@ public class Restaurante_PedidoResultsAdapter  extends  RecyclerView.Adapter<Res
 
     private List<Restaurante_Pedido> results= new ArrayList<>();
     private ClickPedidoReciente mClickPedidoReciente;
-    private boolean addItem=false;
 
     @NonNull
     @Override
@@ -35,37 +34,18 @@ public class Restaurante_PedidoResultsAdapter  extends  RecyclerView.Adapter<Res
     public void onBindViewHolder(@NonNull Restaurante_PedidoResultsHolder holder, int position) {
 
         Restaurante_Pedido restaurante_pedido=results.get(position);
-
-        if(restaurante_pedido.getIdestado_venta()==1){
-
-            holder.linear_change_state.setBackgroundColor(Color.rgb(59,191,130));
-        }
-
         holder.fragment_home_item_orden_CANTIDAD_PRODUCTOS.setText(String.valueOf(restaurante_pedido.getPedido_cantidadtotal()));
-        holder.fragment_home_item_orden_CANTIDAD_PRODUCTOS.setTextColor(Color.WHITE);
 
 
         String pattern = "hh:mm:ss a";
         DateFormat dateFormat = new SimpleDateFormat(pattern);
-        String fecha=dateFormat.format(restaurante_pedido.getVenta_fecha());
-        //String.valueOf(restaurante_pedido.getVenta_fecha())
-
-        System.out.println(String.valueOf(restaurante_pedido.getVenta_fecha()));
-        System.out.println(fecha);
-        System.out.println("------------------");
+        String fecha=dateFormat.format(restaurante_pedido.getVentafecha());
 
         holder.fragment_home_item_orden_HORA_DE_LLEGADA.setText(fecha);
-        holder.fragment_home_item_orden_HORA_DE_LLEGADA.setTextColor(Color.WHITE);
 
+        holder.fragment_home_item_orden_NOMBRE_CLIENTE.setText(restaurante_pedido.getNombre());
 
-        holder.fragment_home_item_orden_NOMBRE_CLIENTE.setText(restaurante_pedido.getUsuario_nombre());
-        holder.fragment_home_item_orden_NOMBRE_CLIENTE.setTextColor(Color.WHITE);
-
-        holder.fragment_home_item_orden_NUMERO_ORDEN.setText("#"+restaurante_pedido.getIdempresa()+""+
-                restaurante_pedido.getIdpedido()+""+
-                restaurante_pedido.getIdventa());
-
-        holder.fragment_home_item_orden_NUMERO_ORDEN.setTextColor(Color.WHITE);
+        holder.fragment_home_item_orden_NUMERO_ORDEN.setText("#"+restaurante_pedido.getIdventa());
 
         holder.fragment_home_item_orden_COSTO_TOTAL.setText(String.valueOf(restaurante_pedido.getVenta_costototal()));
 
@@ -84,27 +64,11 @@ public class Restaurante_PedidoResultsAdapter  extends  RecyclerView.Adapter<Res
         notifyDataSetChanged();
     }
 
-    public  void addResults(Restaurante_Pedido restaurante_pedido,boolean addItem){
+    public  void addResults(Restaurante_Pedido restaurante_pedido,ClickPedidoReciente clickPedidoReciente){
 
-        if(results.size()==0){
-            List<Restaurante_Pedido> lista= new ArrayList<>();
-            lista.add(restaurante_pedido);
-            this.results=lista;
-            System.out.println("lista " + restaurante_pedido.getIdventa() + " " +restaurante_pedido.getIdempresa());
-            notifyItemInserted(0);
-        }else{
-
-              results.add(results.size(),restaurante_pedido);
-            System.out.println("lista  2 " + restaurante_pedido.getIdventa() + " " +restaurante_pedido.getIdempresa());
-
-        }
+        this.mClickPedidoReciente=clickPedidoReciente;
+        results.add(results.size(),restaurante_pedido);
         notifyDataSetChanged();
-
-
-        for(Restaurante_Pedido p:results){
-            System.out.println("lista  add" + p.getIdventa() + " " +p.getIdempresa());
-
-        }
 
     }
 
@@ -127,7 +91,6 @@ public class Restaurante_PedidoResultsAdapter  extends  RecyclerView.Adapter<Res
 
         private ClickPedidoReciente mClickPedidoReciente;
         private TextView fragment_home_item_orden_COSTO_TOTAL,fragment_home_item_orden_HORA_DE_LLEGADA,fragment_home_item_orden_NUMERO_ORDEN,fragment_home_item_orden_NOMBRE_CLIENTE,fragment_home_item_orden_CANTIDAD_PRODUCTOS;
-        private LinearLayout linear_change_state;
         public Restaurante_PedidoResultsHolder(@NonNull View itemView,ClickPedidoReciente clickPedidoReciente) {
             super(itemView);
             this.mClickPedidoReciente=clickPedidoReciente;
@@ -136,14 +99,12 @@ public class Restaurante_PedidoResultsAdapter  extends  RecyclerView.Adapter<Res
             fragment_home_item_orden_NOMBRE_CLIENTE=itemView.findViewById(R.id.fragment_home_item_orden_NOMBRE_CLIENTE);
             fragment_home_item_orden_CANTIDAD_PRODUCTOS=itemView.findViewById(R.id.fragment_home_item_orden_CANTIDAD_PRODUCTOS);
             fragment_home_item_orden_COSTO_TOTAL=itemView.findViewById(R.id.fragment_home_item_orden_COSTO_TOTAL);
-            linear_change_state=itemView.findViewById(R.id.linear_change_state);
             itemView.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View view) {
-            System.out.println(results.get(getAdapterPosition()).getUsuario_nombre() + "zona click" + " position"+ getAdapterPosition());
             mClickPedidoReciente.clickPedido(results.get(getAdapterPosition()),getAdapterPosition());
         }
     }

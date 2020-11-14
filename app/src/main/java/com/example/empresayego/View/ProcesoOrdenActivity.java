@@ -1,54 +1,112 @@
 package com.example.empresayego.View;
 
-import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.util.SparseArray;
 import android.view.Menu;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.empresayego.R;
 import com.example.empresayego.Repository.Modelo.Empresa;
-import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity;
-import com.example.empresayego.ViewModel.EmpresaViewModel;
+import com.example.empresayego.Repository.Modelo.Restaurante_Pedido;
+import com.example.empresayego.View.DrawerUI.cerrar_sesion.CerrarSesionFragment;
+import com.example.empresayego.View.DrawerUI.dataEmpresa.DataEmpresaFragment;
+import com.example.empresayego.View.DrawerUI.productos.ProductoFragment;
+import com.example.empresayego.View.DrawerUI.soporte.SoporteFragment;
+import com.example.empresayego.View.OrderUI.NewOrder.ListNewOdersFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.pusher.client.Pusher;
+import com.pusher.client.PusherOptions;
+import com.pusher.client.channel.Channel;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class ProcesoOrdenActivity extends AppCompatActivity {
+public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOdersFragment.EmpresaEnable , SoporteFragment.BackToInicio, DataEmpresaFragment.BackToInicio, ProductoFragment.BackToInicio, CerrarSesionFragment.BackToInicio {
+    private static final String RESPUESTA = "repsuesta";
     private AppBarConfiguration appBarConfiguration;
     BottomNavigationView bottomNavView;
     DrawerLayout drawer;
     NavigationView navigationView;
     NavController navController;
-    private TextView activity_proceso_orden_NOMBRE_EMPRESA;
-    private Switch activity_proceso_orden_SWITCH_ENABLE;
     private Empresa mEmpresa;
 
-    public final static String EMPRESA_OBJETO="com.example.empresayego.View.ProcesoOrdenActivity";
+    public static final String CHANNEL_1_ID = "channel1";
 
-    private EmpresaViewModel viewModel;
+
+    public static Pusher pusher;
+    public static Channel channel,channel_proces ;
+
+    public static SparseArray<CountDownTimer> countDownMap;
+
+    public static List<Restaurante_Pedido> lista;
+
+    private NavInflater navInflater;
+
+    private NavGraph graph;
+
+    private NavController nav;
+
+    public final static String EMPRESA_OBJETO="com.example.empresayego.View.ProcesoOrdenActivity";
+    private boolean respuesta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proceso_orden);
 
+
+        reciveDataIntent();
+
+        NavHostFragment navHost= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_main);
+        nav= navHost.getNavController();
+
+        navInflater = nav.getNavInflater();
+        graph = navInflater.inflate(R.navigation.mobile_navigation);
+
+        if (respuesta) {
+            graph.setStartDestination(R.id.navigation_proces_orders);
+        } else {
+            graph.setStartDestination(R.id.navigation_list_new_orders);
+        }
+
+
+
+        nav.setGraph(graph);
+
+        lista=new ArrayList<>();
+
+        countDownMap = new SparseArray<>();
 
         drawer = findViewById(R.id.drawer_layout);
 
@@ -58,15 +116,15 @@ public class ProcesoOrdenActivity extends AppCompatActivity {
         bottomNavView = findViewById(R.id.bottom_nav_view);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard,
-                R.id.navigation_notifications,
-                R.id.nav_gallery, R.id.nav_home, R.id.nav_send,
-                R.id.nav_share, R.id.nav_slideshow, R.id.nav_tools)
-                .setDrawerLayout(drawer)
+                R.id.navigation_list_new_orders, R.id.navigation_proces_orders,
+                R.id.navigation_ready_order,R.id.nav_cerrar_sesion,R.id.nav_producto,R.id.nav_soporte,R.id.nav_data_empresa,R.id.nav_historial,R.id.nav_deuda)
                 .build();
 
 
+
         navController= Navigation.findNavController(this, R.id.nav_host_fragment_main);
+
+
 
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
@@ -75,92 +133,69 @@ public class ProcesoOrdenActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView,navController);
 
 
-        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-            @Override
-            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
 
-                if(R.id.navigation_home == destination.getId() ||
-                        R.id.navigation_dashboard == destination.getId() ||
-                        R.id.navigation_notifications == destination.getId()
-                ){
-                    bottomNavView.setVisibility(View.VISIBLE);
-                }else{
-                    bottomNavView.setVisibility(View.GONE);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
 
-                }
 
-                System.out.println(destination.getId()+ "ID DE LA FRAGMENT SELECCIONADO");
+            if(R.id.navigation_list_new_orders == destination.getId() ||
+                    R.id.navigation_proces_orders == destination.getId() ||
+                    R.id.navigation_ready_order == destination.getId()||R.id.nav_historial==destination.getId()
+            ){
+                bottomNavView.setVisibility(View.VISIBLE);
+            }else{
 
+                bottomNavView.setVisibility(View.GONE);
             }
+
+
         });
 
 
-        reciveDataIntent();
-        delcararWidgets();
-        //setWidgets();
-        changeDisponibilidadEmpresa();
-        declararEmpreaViewModel();
+      //  reciveDataIntent();
+
+        initDataDrawer();
+
+        settingPusher();
+
+        funPusher();
 
     }
 
-
-    private void declararEmpreaViewModel(){
-        viewModel= ViewModelProviders.of(this).get(EmpresaViewModel.class);
-        viewModel.init();
-        viewModel.getEmpresaLiveData().observe(this, new Observer<Empresa>() {
-            @Override
-            public void onChanged(Empresa empresa) {
-
-                if(empresa !=null){
-                    Empresa.sEmpresa.setDisponible(empresa.isDisponible());
-                }
-            }
-        });
+    private void settingPusher(){
+        PusherOptions options = new PusherOptions();
+        options.setCluster("us2");
+        pusher = new Pusher( "18c8170377c406cfcf3a", options);
+        channel= pusher.subscribe("canal-orden-reciente-"+Empresa.sEmpresa.getIdempresa());
+        channel_proces=pusher.subscribe("canal-orden-proces-"+Empresa.sEmpresa.getIdempresa());
     }
 
+    public void initDataDrawer(){
 
+        View hView =  navigationView.getHeaderView(0);
+        TextView nombre_usuario=hView.findViewById(R.id.nombre_usuario);
+        TextView correo_usuario=hView.findViewById(R.id.correo_usuario);
 
-    private void delcararWidgets(){
+        Empresa cliente_bi=Empresa.sEmpresa;
+        correo_usuario.setText(cliente_bi.getCorreo());
+        nombre_usuario.setText(cliente_bi.getNombre());
 
-        activity_proceso_orden_NOMBRE_EMPRESA=findViewById(R.id.activity_proceso_orden_NOMBRE_EMPRESA);
-        activity_proceso_orden_SWITCH_ENABLE=findViewById(R.id.activity_proceso_orden_SWITCH_ENABLE);
+        ImageView imageView_USUARIO = hView.findViewById(R.id.imageView_USUARIO);
 
+        if (cliente_bi.getFoto()!= null) {
+            String imageUrl = cliente_bi.getFoto()
+                    .replace("http://", "https://");
 
-    }
-
-    private void setWidgets(Empresa empresa){
-
-        System.out.println(empresa.getNombre_empresa() + "NOMRBE EMRPESA");
-       // activity_proceso_orden_NOMBRE_EMPRESA.setText(empresa.getNombre_empresa());
-
-        if(empresa.isDisponible()){
-            activity_proceso_orden_SWITCH_ENABLE.setChecked(empresa.isDisponible());
-            activity_proceso_orden_SWITCH_ENABLE.setBackgroundColor(Color.GREEN);
-
+            Glide.with(this)
+                    .load(imageUrl)
+                    .into(imageView_USUARIO);
         }
-
     }
 
-    private void changeDisponibilidadEmpresa(){
-        activity_proceso_orden_SWITCH_ENABLE.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean response) {
-                if(response){
-                    viewModel.updateEmpresaDisponiblidad(mEmpresa.getIdempresa(),response);
-                    activity_proceso_orden_SWITCH_ENABLE.setChecked(true);
-                    activity_proceso_orden_SWITCH_ENABLE.setBackgroundColor(Color.GREEN);
-
-                }else{
-                    viewModel.updateEmpresaDisponiblidad(mEmpresa.getIdempresa(),response);
-                    activity_proceso_orden_SWITCH_ENABLE.setChecked(false);
-                    activity_proceso_orden_SWITCH_ENABLE.setBackgroundColor(Color.GRAY);
 
 
-                }
-            }
-        });
 
-    }
+
+
 
 
 
@@ -192,18 +227,99 @@ public class ProcesoOrdenActivity extends AppCompatActivity {
     }
 
     private void reciveDataIntent() {
-        if (getIntent().getSerializableExtra(EMPRESA_OBJETO) != null) {
-            mEmpresa = (Empresa) getIntent().getSerializableExtra(EMPRESA_OBJETO);
-            System.out.println(mEmpresa.getNombre_empresa() + " -- "+mEmpresa.getDireccion_empresa());
-            setWidgets(mEmpresa);
+
+        respuesta=getIntent().getBooleanExtra(RESPUESTA,false);
+
+    }
+
+    public static Intent startIntentProcesoOrdenActivity(Context context,boolean respuesta){
+        Intent intent= new Intent(context, ProcesoOrdenActivity.class);
+        intent.putExtra(EMPRESA_OBJETO,respuesta);
+        return intent;
+    }
+
+
+    @Override
+    public void stateEmpresa(boolean state) {
+        if(state){
+            bottomNavView.setVisibility(View.GONE);
+        }else {
+            bottomNavView.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+    @Override
+    public void back() {
+        graph.setStartDestination(R.id.navigation_list_new_orders);
+        nav.setGraph(graph);
+    }
+
+
+    private void funPusher() {
+        ProcesoOrdenActivity.channel.bind("my-event", (channelName, eventName, data) -> {
+
+            JsonParser parser = new JsonParser();
+            JsonElement mJson = parser.parse(data);
+            Gson gson = new Gson();
+            Restaurante_Pedido object = gson.fromJson(mJson, Restaurante_Pedido.class);
+
+            createNotificationChannel();
+
+            String titulo="Nuevo pedido";
+
+            String message="Pedido"+object.getIdventa()+" : "+object.getListaProductos().size()+" productos , total  S/"+object.getVenta_costototal();
+
+            String pattern = "hh:mm:ss a";
+            DateFormat dateFormat = new SimpleDateFormat(pattern);
+            String fecha=dateFormat.format(object.getVentafecha().toString());
+
+
+            publishNotification(titulo,message,fecha);
+        });
+        ProcesoOrdenActivity.pusher.connect();
+    }
+
+
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name="Notification";
+            NotificationChannel notificationChannel = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    name,
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager notificationManager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
 
         }
 
     }
 
-    public static Intent startIntentProceso(Context context, Empresa empresa){
-        Intent intent= new Intent(context, ProcesoOrdenActivity.class);
-        intent.putExtra(EMPRESA_OBJETO,empresa);
-        return intent;
+    private void publishNotification(String titulo,String mensaje,String horario){
+
+        Intent i=ProcesoOrdenActivity. startIntentProcesoOrdenActivity(this,true);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+
+                .setContentIntent(pendingIntent)
+                .setContentTitle(titulo)
+                .setContentText(mensaje)
+                .setSubText(horario)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                .setSound(Uri.parse("android.resource://"
+                        + getApplicationContext().getPackageName() + "/" + R.raw.soundorden))
+                .build();
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+        notificationManager.notify(1, notification);
     }
+
+
 }

@@ -9,6 +9,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,45 +20,48 @@ import android.widget.Toast;
 import com.example.empresayego.R;
 import com.example.empresayego.Repository.Modelo.Restaurante_Pedido;
 import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.AyudaActivity;
-import com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.EliminarFragment;
+import com.example.empresayego.View.OrderUI.ProcessOrder.ProcesOrderFragment;
 
-public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrderDetailFragment.OnDataPass  {
+import java.sql.Timestamp;
+
+public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrderDetailFragment.OnDataPass,FragmentComentarioVentaDialog.FormDialogListener1  {
 
     public final static String RESTAURANTE_PEDIDO="com.example.empresayego.View.OrderUI.NewOrder.Detail.RestauranteObjeto";
 
     public final static String POSITION="com.example.empresayego.View.OrderUI.NewOrder.Detail.posicion";
 
-    public final static String POSITION_COUNT="com.example.empresayego.View.OrderUI.NewOrder.Detail.posicionCount";
-
 
     private Restaurante_Pedido mRestaurante_pedido;
 
-    private LinearLayout acticity_proces_order_HELP;
+    private Timestamp fechaServidor;
 
     private int position;
-
-    private int positionCount;
 
     private boolean eliminar=false;
 
     private boolean agregar=false;
 
-    private boolean updateTime=false;
+    private boolean updateTime=false,price;
 
     private int cantidadTiempo=0;
 
-
-
     public final static int CODE=546;
-
+    private float priceTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proces_order);
 
+        initVariable();
         //getSupportActionBar().hide();
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v->{
+            onBackPressed();
+        });
 
         //RECIVE DATA
         reciveDataIntent();
@@ -68,10 +72,15 @@ public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrde
      //  settingToolBar();
 
 
-
-
     }
 
+    private void initVariable(){
+
+        eliminar=false;
+        agregar=false;
+       updateTime=false;
+       price=false;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -82,59 +91,57 @@ public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrde
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_add) {
+        if (id == R.id.action_add && tiempoRestante()) {
 
-            Intent intent= AyudaActivity.newIntentOrderProcesDetail(ProcesOrderActivity.this,mRestaurante_pedido,position,positionCount);
+           Intent intent= AyudaActivity.newIntentOrderProcesDetail(ProcesOrderActivity.this,mRestaurante_pedido,position);
             startActivityForResult(intent,CODE);
+
+        }else {
+
+            Toast.makeText(this, "Ya no cuentas con tiempo", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    private void settingToolBar(){
-
-        acticity_proces_order_HELP=findViewById(R.id.acticity_proces_order_HELP);
-
-        acticity_proces_order_HELP.setOnClickListener( v ->{
-
-            Intent intent= AyudaActivity.newIntentOrderProcesDetail(ProcesOrderActivity.this,mRestaurante_pedido,position,positionCount);
-            startActivityForResult(intent,CODE);
-        });
-    }
-*/
 
 
 
 
     private void returnData(){
 
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " los datos estan retornando de PROCESOR ORDER ACTIVITY" + position +" ##"+cantidadTiempo);
 
         Intent returnIntent = new Intent();
         Bundle bundle= new Bundle();
         bundle.putBoolean("agregar",agregar);
+        bundle.putString("fechaServidor",fechaServidor.toString());
         bundle.putInt("position",position);
         bundle.putSerializable("objeto",mRestaurante_pedido);
-        bundle.putInt("positionCount",positionCount);
+       // bundle.putInt("positionCount",positionCount);
         bundle.putBoolean("updateTime",updateTime);
         bundle.putInt("cantidadTiempo",cantidadTiempo);
         bundle.putBoolean("eliminar",eliminar);
+        bundle.putFloat("priceTotal",priceTotal);
+        bundle.putBoolean("price",price);
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK,returnIntent);
     }
 
 
     private void passDataFragemnt(){
-        ProcesOrderDetailFragment fragment = (ProcesOrderDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_proces_order_detail);
+  /*      ProcesOrderDetailFragment fragment = (ProcesOrderDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_proces_order_detail);
         if(fragment !=null){
             fragment.setPassData(mRestaurante_pedido);
         }
+*/
+
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("EMPRESA",mRestaurante_pedido);
+        ProcesOrderDetailFragment fragment=new ProcesOrderDetailFragment();
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_proces_order_detail,fragment).commit();
     }
     private void reciveDataIntent(){
         if(getIntent().getSerializableExtra(RESTAURANTE_PEDIDO) !=null){
@@ -144,20 +151,14 @@ public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrde
             position=getIntent().getIntExtra(POSITION,100000);
         }
 
-        if(getIntent().getSerializableExtra(POSITION_COUNT) !=null){
-            positionCount=getIntent().getIntExtra(POSITION_COUNT,100000);
-        }
-
-        System.out.println( mRestaurante_pedido.getUsuario_nombre() + " el objeto llego  y la possicion " + position +" ##");
-
     }
 
 
-    public static Intent newIntentOrderProcesDetail(Context context, Restaurante_Pedido restaurante_pedido, int position,int positionCount){
+    public static Intent newIntentOrderProcesDetail(Context context, Restaurante_Pedido restaurante_pedido, int position){
         Intent intent= new Intent(context, ProcesOrderActivity.class);
         intent.putExtra(RESTAURANTE_PEDIDO,restaurante_pedido);
         intent.putExtra(POSITION,position);
-        intent.putExtra(POSITION_COUNT,positionCount);
+      //  intent.putExtra(POSITION_COUNT,positionCount);
         return intent;
     }
 
@@ -173,11 +174,14 @@ public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrde
                 Bundle bundle= data.getExtras();
                 updateTime=bundle.getBoolean("updateTime");
                 position=bundle.getInt("position");
-                positionCount=bundle.getInt("positionCount");
+                //positionCount=bundle.getInt("positionCount");
                 mRestaurante_pedido=(Restaurante_Pedido) bundle.getSerializable("objeto");
                 cantidadTiempo=bundle.getInt("cantidadTiempo");
                 eliminar=bundle.getBoolean("eliminar");
-                System.out.println( mRestaurante_pedido.getUsuario_nombre() + " los datos llegaron  a PROCESOR ACTIVIY" + position +" ##"+cantidadTiempo);
+              //  System.out.println( mRestaurante_pedido.getUsuario_nombre() + " los datos llegaron  a PROCESOR ACTIVIY" + position +" ##"+cantidadTiempo);
+
+                priceTotal=bundle.getFloat("priceTotal");
+                price=bundle.getBoolean("price");
 
                 returnData();
 
@@ -191,117 +195,46 @@ public class ProcesOrderActivity extends AppCompatActivity implements ProcesOrde
     }
 
     @Override
-    public void onDataPass(boolean agregar) {
+    public void onDataPass(boolean agregar, Timestamp fechaServidor) {
         this.agregar=agregar;
+        this.fechaServidor=fechaServidor;
         //RETURN DATA
         returnData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(price){
+            ProcesOrderDetailFragment fragment = (ProcesOrderDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_proces_order_detail);
+            if(fragment !=null){
+                fragment.updatePrice(priceTotal);
+            }
+        }
+    }
 
+    private boolean tiempoRestante(){
+
+        Timestamp timeStart = Timestamp.valueOf(mRestaurante_pedido.getFechaAceptado());
+
+        Timestamp timeNow=new Timestamp(System.currentTimeMillis());
+
+        long difference = timeNow.getTime() - timeStart.getTime();
+
+        long tiempoTotal = (long) (Integer.valueOf(mRestaurante_pedido.getTiempototal_espera()));
+
+        long tiempoRestante = tiempoTotal - difference;
+
+        return tiempoRestante > 0;
+    }
+
+    @Override
+    public void update(boolean respuesta,Timestamp fecha) {
+        this.agregar=respuesta;
+        this.fechaServidor=fecha;
+        //RETURN DATA
+        returnData();
+
+        new Handler().postDelayed(this::finish, 2000);
+    }
 }
-/*
-*
-*
-*   <LinearLayout
-        android:elevation="5dp"
-        android:id="@+id/activity_proces_order_TOOLBAR"
-        android:orientation="horizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_proces_order_detail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-            <LinearLayout
-                android:id="@+id/linearLayout16"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout17"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_back"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout17"
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/acticity_proces_order_HELP"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout16"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-
-                    android:layout_width="250dp"
-                    android:layout_height="match_parent" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/acticity_proces_order_HELP"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout17"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_ayuda"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-    </LinearLayout>
-    *
-    *
-    *
-    *
-    *
-    *
-    *   <Toolbar
-        android:id="@+id/activity_proces_order_TOOLBAR"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_proces_order_detail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-*
-* */
