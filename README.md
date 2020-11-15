@@ -5,14 +5,14 @@ This app was build in android studio with java.
 
 ## Picture
 
-![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_171459%20(1).jpg?alt=media&token=a79a382a-fb8b-41b8-b972-2e88dfa55592) | ![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_171626.jpg?alt=media&token=9ea501ca-1649-452f-aee9-b0b93677f3bc) 
-![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_171634.jpg?alt=media&token=42468b29-5c75-481c-a758-e17d574a69c0)
+![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_220018.jpg?alt=media&token=a3543af5-5763-4b87-9f87-fd769dd75bd5) | ![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_220046.jpg?alt=media&token=91a40b68-ae48-4ab0-a093-48eba72af353) 
+![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_220117.jpg?alt=media&token=0c331d25-0733-49d4-b26f-d4a50f0e110b) | ![alt text](https://firebasestorage.googleapis.com/v0/b/yegoo-a857b.appspot.com/o/Screenshot_20201114_220131.jpg?alt=media&token=111f666c-a9c8-43df-8d9e-42d6287283d6) 
 
 ## Video
 
-Please gift me a like !!!
+Please gift me a like :D !!!
 
-- https://www.youtube.com/watch?v=_DiA6-p0ntE
+- https://youtu.be/lQzKR0eOq6E
 
 ## Details 
 
@@ -20,12 +20,9 @@ Please gift me a like !!!
 - New rder 
 - Prepare order
 - Ready order
-- Hi
-- Detail store
-- Shopping cart
-- Checkout
-- Order
-- Perfil User
+- Historial order
+- Products
+- Perfil store
 
 ## Contacts
 
