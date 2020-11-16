@@ -51,6 +51,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import static com.example.empresayego.R.*;
+import static com.example.empresayego.R.string.*;
+
 public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOdersFragment.EmpresaEnable , SoporteFragment.BackToInicio, DataEmpresaFragment.BackToInicio, ProductoFragment.BackToInicio, CerrarSesionFragment.BackToInicio {
     private static final String RESPUESTA = "repsuesta";
     private AppBarConfiguration appBarConfiguration;
@@ -83,21 +86,21 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_proceso_orden);
+        setContentView(layout.activity_proceso_orden);
 
 
         reciveDataIntent();
 
-        NavHostFragment navHost= (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_main);
+        NavHostFragment navHost= (NavHostFragment) getSupportFragmentManager().findFragmentById(id.nav_host_fragment_main);
         nav= navHost.getNavController();
 
         navInflater = nav.getNavInflater();
-        graph = navInflater.inflate(R.navigation.mobile_navigation);
+        graph = navInflater.inflate(navigation.mobile_navigation);
 
         if (respuesta) {
-            graph.setStartDestination(R.id.navigation_proces_orders);
+            graph.setStartDestination(id.navigation_proces_orders);
         } else {
-            graph.setStartDestination(R.id.navigation_list_new_orders);
+            graph.setStartDestination(id.navigation_list_new_orders);
         }
 
 
@@ -108,21 +111,21 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
 
         countDownMap = new SparseArray<>();
 
-        drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(id.drawer_layout);
 
-        navigationView = findViewById(R.id.nav_view_main);
+        navigationView = findViewById(id.nav_view_main);
 
 
-        bottomNavView = findViewById(R.id.bottom_nav_view);
+        bottomNavView = findViewById(id.bottom_nav_view);
 
         appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_list_new_orders, R.id.navigation_proces_orders,
-                R.id.navigation_ready_order,R.id.nav_cerrar_sesion,R.id.nav_producto,R.id.nav_soporte,R.id.nav_data_empresa,R.id.nav_historial,R.id.nav_deuda)
+                id.navigation_list_new_orders, id.navigation_proces_orders,
+                id.navigation_ready_order, id.nav_cerrar_sesion, id.nav_producto, id.nav_soporte, id.nav_data_empresa, id.nav_historial, id.nav_deuda)
                 .build();
 
 
 
-        navController= Navigation.findNavController(this, R.id.nav_host_fragment_main);
+        navController= Navigation.findNavController(this, id.nav_host_fragment_main);
 
 
 
@@ -137,9 +140,9 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
 
 
-            if(R.id.navigation_list_new_orders == destination.getId() ||
-                    R.id.navigation_proces_orders == destination.getId() ||
-                    R.id.navigation_ready_order == destination.getId()||R.id.nav_historial==destination.getId()
+            if(id.navigation_list_new_orders == destination.getId() ||
+                    id.navigation_proces_orders == destination.getId() ||
+                    id.navigation_ready_order == destination.getId()|| id.nav_historial==destination.getId()
             ){
                 bottomNavView.setVisibility(View.VISIBLE);
             }else{
@@ -163,8 +166,8 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
 
     private void settingPusher(){
         PusherOptions options = new PusherOptions();
-        options.setCluster("us2");
-        pusher = new Pusher( "18c8170377c406cfcf3a", options);
+        options.setCluster(getString(pusher_region));
+        pusher = new Pusher( getString(pusher_apikey), options);
         channel= pusher.subscribe("canal-orden-reciente-"+Empresa.sEmpresa.getIdempresa());
         channel_proces=pusher.subscribe("canal-orden-proces-"+Empresa.sEmpresa.getIdempresa());
     }
@@ -172,14 +175,14 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
     public void initDataDrawer(){
 
         View hView =  navigationView.getHeaderView(0);
-        TextView nombre_usuario=hView.findViewById(R.id.nombre_usuario);
-        TextView correo_usuario=hView.findViewById(R.id.correo_usuario);
+        TextView nombre_usuario=hView.findViewById(id.nombre_usuario);
+        TextView correo_usuario=hView.findViewById(id.correo_usuario);
 
         Empresa cliente_bi=Empresa.sEmpresa;
         correo_usuario.setText(cliente_bi.getCorreo());
         nombre_usuario.setText(cliente_bi.getNombre());
 
-        ImageView imageView_USUARIO = hView.findViewById(R.id.imageView_USUARIO);
+        ImageView imageView_USUARIO = hView.findViewById(id.imageView_USUARIO);
 
         if (cliente_bi.getFoto()!= null) {
             String imageUrl = cliente_bi.getFoto()
@@ -208,7 +211,7 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_main);
+        NavController navController = Navigation.findNavController(this, id.nav_host_fragment_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }
@@ -251,7 +254,7 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
 
     @Override
     public void back() {
-        graph.setStartDestination(R.id.navigation_list_new_orders);
+        graph.setStartDestination(id.navigation_list_new_orders);
         nav.setGraph(graph);
     }
 
@@ -303,7 +306,7 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(mipmap.ic_launcher)
 
                 .setContentIntent(pendingIntent)
                 .setContentTitle(titulo)
@@ -313,7 +316,7 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
                 .setSound(Uri.parse("android.resource://"
-                        + getApplicationContext().getPackageName() + "/" + R.raw.soundorden))
+                        + getApplicationContext().getPackageName() + "/" + raw.soundorden))
                 .build();
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());

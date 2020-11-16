@@ -67,4 +67,6 @@
     <string name="nombre_aplicacion">YegoO.</string>
     <string name="type_businnes">negocios</string>
     <string name="ubicacion_empresa">Ubicacion</string>
+    <string name="pusher_apikey">18c8170377c406cfcf3a</string>
+    <string name="pusher_region">us2</string>
 </resources>
