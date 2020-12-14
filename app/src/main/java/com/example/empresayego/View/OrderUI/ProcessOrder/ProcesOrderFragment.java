@@ -426,7 +426,7 @@ public class ProcesOrderFragment extends Fragment implements  Restaurante_Pedido
             System.out.println(restaurante_pedido.getListaProductos());
 
 
-        Toast.makeText(getContext(),"position " +  posisiton,Toast.LENGTH_SHORT).show();
+
 
     }
 

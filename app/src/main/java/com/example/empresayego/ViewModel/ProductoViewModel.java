@@ -45,8 +45,8 @@ public class ProductoViewModel extends AndroidViewModel {
         mProductoRepository.searchListProducto(token,idcategoriaproducto,idempresa);
     }
 
-    public void insertProduct(int idempresa,int idcategoriaproducto,Producto producto){
-        mProductoRepository.insertProduct(token,idempresa,idcategoriaproducto,producto);
+    public void insertProduct(Producto producto){
+        mProductoRepository.insertProduct(token,producto);
     }
 
     public  LiveData<Producto> getProductoLiveData(){

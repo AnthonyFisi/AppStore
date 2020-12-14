@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementPrice.IncrementPriceFragment">
 
@@ -74,32 +74,33 @@
     <LinearLayout
         android:id="@+id/linearLayout_INCREMENT_PRICE"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginStart="8dp"
+                android:gravity="center"
                 android:text="Incrementar precio"
                 android:textSize="36sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginStart="8dp"
+                android:gravity="center"
                 android:text="* Incremento maximo de 10 soles"
                 android:textSize="16sp" />
 
@@ -151,9 +152,9 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
-                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -161,8 +162,8 @@
                     android:id="@+id/fragment_increment_DISMINUIR_TIEMPO"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:backgroundTint="@color/original_color"
-                    android:background="@drawable/menos" />
+                    android:background="@drawable/menos"
+                    android:backgroundTint="@color/original_color" />
 
                 <TextView
                     android:id="@+id/fragment_increment_TIEMPO"
@@ -179,8 +180,8 @@
                     android:id="@+id/fragment_increment_INCREMENTAR_TIEMPO"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:backgroundTint="@color/original_color"
-                    android:background="@drawable/mas" />
+                    android:background="@drawable/mas"
+                    android:backgroundTint="@color/original_color" />
             </LinearLayout>
 
 
@@ -209,9 +210,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/original_color"
             app:cardCornerRadius="8dp">
 
@@ -239,7 +240,6 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
 
     </LinearLayout>

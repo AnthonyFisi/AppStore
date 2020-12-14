@@ -63,13 +63,13 @@ public class TipoMenuFragment extends BottomSheetDialogFragment {
         ImageView imageView=view.findViewById(R.id.imageView);
 
         entrada.setOnClickListener(v->{
-            Intent intent=NewProductActivity.startIntentCategoriaDetailActivity(getContext(),mCategoria_producto_empresa,1);
-            startActivity(intent);
+            //Intent intent=NewProductActivity.startIntentCategoriaDetailActivity(getContext(),mCategoria_producto_empresa,1);
+           // startActivity(intent);
         });
 
         menu.setOnClickListener(v->{
-            Intent intent=NewProductActivity.startIntentCategoriaDetailActivity(getContext(),mCategoria_producto_empresa,2);
-            startActivity(intent);
+        //    Intent intent=NewProductActivity.startIntentCategoriaDetailActivity(getContext(),mCategoria_producto_empresa,2);
+          //  startActivity(intent);
         });
 
         imageView.setOnClickListener(v->{

@@ -1,13 +1,16 @@
 package com.example.empresayego.View.DrawerUI.productos.ProductoDetail;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,13 +24,19 @@ import android.widget.Toast;
 import com.example.empresayego.R;
 import com.example.empresayego.Repository.Modelo.Categoria_producto_empresa;
 import com.example.empresayego.Repository.Modelo.Empresa;
+import com.example.empresayego.Repository.Modelo.Gson.GsonProducto;
 import com.example.empresayego.Repository.Modelo.Producto;
+import com.example.empresayego.View.DrawerUI.productos.AddProduct.NewProductActivity;
 import com.example.empresayego.ViewModel.ProductoViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class CategoriaDetailActivity extends AppCompatActivity  implements ProductoResultsAdapter.ItemClickProducto{
 
     private static final String CATEGORIA_PRODUCTO_EMPRESA = "categoriaproducto";
+    private static final String GSONPRODUCTO = "gsonproductos";
+
+    private static final int CODEPRODUCTO = 12;
     private ProductoViewModel viewModel;
     private ProductoResultsAdapter adapter;
     private RecyclerView fragment_product_recyclerView ;
@@ -37,6 +46,9 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
     private ProgressBar progresbar_productos;
     private LinearLayout linearLayout15,reload_activity;
     private ImageView reload_image;
+    private GsonProducto gsonproducto;
+
+    private FloatingActionButton floatingActionButtonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +57,27 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
 
 
         reciveDataIntent();
+
         loadData();
+
         declararWidget();
+
         setDataWidget();
+
         seachOrder();
+
         updateDataReponse();
 
         reloadViewModel();
 
-        /*linearLayout15.setVisibility(View.GONE);
-        fragment_product_recyclerView.setVisibility(View.GONE);
-*/
+        agregarProduct();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
         toolbar.setNavigationOnClickListener(v->{
+
             onBackPressed();
         });
 
@@ -75,6 +93,10 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
         linearLayout15=findViewById(R.id.linearLayout15);
         reload_activity=findViewById(R.id.reload_activity);
         reload_image=findViewById(R.id.reload_image);
+
+
+        floatingActionButtonAdd=findViewById(R.id.floatingActionButtonAdd);
+
     }
 
     private void loadData(){
@@ -116,7 +138,6 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
             public void onChanged(Producto producto) {
                 if(producto !=null){
 
-
                     adapter.modifiedState(producto);
 
                     Toast.makeText(CategoriaDetailActivity.this,"Fue actualizado el producto",Toast.LENGTH_SHORT).show();
@@ -128,6 +149,8 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
             }
         });
     }
+
+
     private void seachOrder(){
 
         // Associate searchable configuration with the SearchView
@@ -182,5 +205,35 @@ public class CategoriaDetailActivity extends AppCompatActivity  implements Produ
         reload_image.setOnClickListener(v->{
             viewModel.searchProducto(categoria_producto_empresa.getIdcategoriaproductoempresa(),Empresa.sEmpresa.getIdempresa());
         });
+    }
+
+    private void agregarProduct(){
+        floatingActionButtonAdd.setOnClickListener(v->{
+
+            Intent intent= NewProductActivity.startIntentCategoriaDetailActivity(CategoriaDetailActivity.this,categoria_producto_empresa);
+            startActivityForResult(intent,CODEPRODUCTO);
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==CODEPRODUCTO){
+            if(resultCode == Activity.RESULT_OK){
+
+                Bundle bundle= data.getExtras();
+
+                gsonproducto=(GsonProducto) bundle.getSerializable(GSONPRODUCTO);
+
+                gsonproducto.getListaProducto().forEach(v->{
+                    adapter.addProduct(v);
+                });
+
+
+            }
+        }
+
     }
 }

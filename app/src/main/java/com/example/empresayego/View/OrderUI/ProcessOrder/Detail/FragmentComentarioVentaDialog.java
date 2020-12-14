@@ -219,7 +219,6 @@ public class FragmentComentarioVentaDialog extends AppCompatDialogFragment imple
     @Override
     public void selectRepartidor(Repartidor_Bi repartidor) {
 
-        Toast.makeText(getContext(),"Nombre : "+repartidor.getNombre_usuario(),Toast.LENGTH_LONG).show();
 
         viewModelEstado.updateEstadoProcesMarketPlace(orden_estado_empresa,idusuario,repartidor.getIdrepartidor());
         linearlayout_progressbar.setVisibility(View.VISIBLE);

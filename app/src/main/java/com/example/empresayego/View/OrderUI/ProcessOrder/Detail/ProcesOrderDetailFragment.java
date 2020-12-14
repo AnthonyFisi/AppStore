@@ -301,13 +301,10 @@ public class ProcesOrderDetailFragment extends Fragment {
                 if(orden_estado_restaurante !=null){
                     passData(true,orden_estado_restaurante.getFecha());
 
-                    //viewModelDelivery.searchRepartidor(gson);
-                    Toast.makeText(getContext(),"FUE ACTUALIZADO",Toast.LENGTH_SHORT).show();
 
                     getActivity().finish();
 
                 }else{
-                    Toast.makeText(getContext(),"NOoooooooo",Toast.LENGTH_SHORT).show();
 
                     passData(false,orden_estado_restaurante.getFecha());
 
@@ -327,12 +324,10 @@ public class ProcesOrderDetailFragment extends Fragment {
                 if(orden_estado_restaurante !=null){
                     passData(true,orden_estado_restaurante.getFecha());
 
-                    Toast.makeText(getContext(),"FUE ACTUALIZADO",Toast.LENGTH_SHORT).show();
 
                     getActivity().finish();
 
                 }else{
-                    Toast.makeText(getContext(),"NOoooooooo",Toast.LENGTH_SHORT).show();
 
                     passData(false,orden_estado_restaurante.getFecha());
 

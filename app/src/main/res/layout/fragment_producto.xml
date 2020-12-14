@@ -46,24 +46,7 @@
             android:textStyle="bold" />
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/anadir_producto_menu"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/proxima_nova_alt_bold"
-                android:gravity="center"
-                android:text="+ Añadir productos"
-                android:textColor="@color/original_color" />
-        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

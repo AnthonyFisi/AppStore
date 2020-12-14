@@ -121,8 +121,8 @@ public class ProductoRepository {
         });
     }
 
-    public void insertProduct(String token,int idempresa,int idcategoriaproducto,Producto producto){
-        mProductoService.insertProducto(token,idempresa,idcategoriaproducto,producto).enqueue(new Callback<Producto>() {
+    public void insertProduct(String token,Producto producto){
+        mProductoService.insertProducto(token,producto).enqueue(new Callback<Producto>() {
             @Override
             public void onResponse(Call<Producto> call, Response<Producto> response) {
 

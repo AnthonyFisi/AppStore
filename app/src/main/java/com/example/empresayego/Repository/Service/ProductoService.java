@@ -25,7 +25,7 @@ public interface ProductoService {
     Call<Producto> updateStateProducto(@Header("Authorization")String auth, @Path("idProducto")int idProducto, @Path("idEmpresa")int idEmpresa, @Path("disponibilidad")boolean disponibilidad);
 
 
-    @POST("/productoController/insertar/{idempresa}/{idcategoriaproducto}")
-    Call<Producto> insertProducto(@Header("Authorization")String auth, @Path("idempresa")int idempresa, @Path("idcategoriaproducto")int idcategoriaproducto, @Body Producto producto);
+    @POST("/productoController/insertar")
+    Call<Producto> insertProducto(@Header("Authorization")String auth, @Body Producto producto);
 
 }

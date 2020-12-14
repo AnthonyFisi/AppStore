@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:titleTextColor="@color/titulo" />
+        app:titleTextColor="@android:color/transparent" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -33,6 +33,14 @@
             android:orientation="vertical">
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                style="@style/StylePromedio"
+                android:textSize="28sp"
+                android:text="Producto nuevo" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -40,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
                 style="@style/StylePromedio"
                 android:text="Nombre" />
 
@@ -91,6 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
                 style="@style/StylePromedio"
                 android:text="Detalle"/>
 
@@ -125,6 +135,85 @@
             </LinearLayout>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                style="@style/StylePromedio"
+                android:text="Imagen de producto" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="* La imagen es opcional" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/tomar_foto"
+                    android:text="Tomar foto"
+                    android:layout_weight="1"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/white"
+                    app:cardElevation="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:background="@drawable/ic_menu_camera"
+                        android:backgroundTint="@color/titulo"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/escoger_galeria"
+                    android:text="Escoger de galeria"
+                    android:textColor="@color/main_color"
+                    android:background="@color/white"
+                    android:layout_weight="1"
+                    app:cardElevation="4dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp">
+                    <ImageView
+                        android:background="@drawable/ic_action_picture"
+                        android:backgroundTint="@color/titulo"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/imageView_producto"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="300dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/textView5"
@@ -132,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="24dp"
                 style="@style/StylePromedio"
                 android:text="Precio"/>
 
@@ -241,92 +330,19 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                style="@style/StylePromedio"
-                android:text="Imagen de producto" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="* La imagen es opcional" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/tomar_foto"
-                    android:text="Tomar foto"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:textColor="@color/main_color"
-                    android:background="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/escoger_galeria"
-                    android:text="Escoger de galeria"
-                    android:textColor="@color/main_color"
-                    android:background="@color/white"
-                    android:layout_weight="1"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/background_photo"
-                    android:gravity="center"
-                    android:background="@drawable/border_inicio_sesion"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="32dp"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp">
-                    <ImageView
-                        android:background="@drawable/ic_image"
-                        android:backgroundTint="@color/background"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"/>
-                </LinearLayout>
-
-
-                <ImageView
-                    android:id="@+id/imageView_producto"
-                    android:layout_width="match_parent"
-                    android:visibility="gone"
-                    android:layout_height="250dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp" />
-            </FrameLayout>
 
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/button_agregar_producto"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 app:cardCornerRadius="10dp"
                 app:cardBackgroundColor="@color/original_color"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp">
                 <LinearLayout
                     android:gravity="center"
@@ -340,7 +356,7 @@
                         android:layout_height="35dp"/>
                     <TextView
                         android:id="@+id/load_text"
-                        android:text="Pedido entregado"
+                        android:text="Añadir producto"
                         android:textColor="@color/white"
                         android:gravity="center"
                         android:textSize="20sp"
@@ -388,6 +404,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:gravity="center"
+            android:textStyle="bold"
             android:text=" Arroz con pollo"
             android:textSize="24sp" />
 
@@ -397,13 +414,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="agregado con exito"
             android:textSize="24sp" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/insert_product"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:elevation="0dp"
             app:cardCornerRadius="8dp"
@@ -423,8 +441,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cerrar_product"
-            android:layout_width="wrap_content"
-            android:elevation="0dp"
+            android:layout_width="200dp"
+            app:cardElevation="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp">

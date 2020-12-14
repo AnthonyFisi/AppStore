@@ -100,6 +100,13 @@ public class ProductoResultsAdapter extends  RecyclerView.Adapter<ProductoResult
         notifyItemChanged(positionFound);
 
     }
+
+    void addProduct(Producto producto){
+        resultsFiltered.add(producto);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public Filter getFilter() {
         return new Filter() {

@@ -87,6 +87,7 @@ public class RastrearRepartidorActivity extends AppCompatActivity implements OnM
     private void listenChangeLocation(){
         DocumentReference docRef = db.collection("UsuariosDelivery").document(String.valueOf(mRestaurante_pedido.getRepartidor_bi().getIdusuariogeneral()));
 
+
         docRef.addSnapshotListener((documentSnapshot, e) -> {
 
             if (e != null) {

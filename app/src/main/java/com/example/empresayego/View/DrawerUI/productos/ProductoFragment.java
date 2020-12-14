@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -40,7 +39,7 @@ public class ProductoFragment extends Fragment  implements ProductosResultsAdapt
     private Categoria_producto_empresaViewModel viewModel;
     private ProductosResultsAdapter4 adapter;
     private RecyclerView fragment_product_recyclerView ;
-    private CardView anadir_producto_menu;
+   // private CardView anadir_producto_menu;
     private Categoria_producto_empresa mCategoria_producto_empresa;
     private ImageView ic_back;
 
@@ -69,10 +68,8 @@ public class ProductoFragment extends Fragment  implements ProductosResultsAdapt
 
                     mCategoria_producto_empresa=gsonCategoria_producto_empresa.getListaCategoriaEmpresa().get(0);
                     adapter.setResults(gsonCategoria_producto_empresa.getListaCategoriaEmpresa(),ProductoFragment.this);
-                    Toast.makeText(getContext(),"Fue actualizado el producto",Toast.LENGTH_SHORT).show();
 
                 }else {
-                    Toast.makeText(getContext(),"No fue actualizado",Toast.LENGTH_SHORT).show();
 
                     reload_activity.setVisibility(View.VISIBLE);
                 }
@@ -104,7 +101,7 @@ public class ProductoFragment extends Fragment  implements ProductosResultsAdapt
 
     private void declararWidget(View view){
         fragment_product_recyclerView=view.findViewById(R.id.fragment_product_recyclerView);
-        anadir_producto_menu=view.findViewById(R.id.anadir_producto_menu);
+        //anadir_producto_menu=view.findViewById(R.id.anadir_producto_menu);
 
         ic_back=view.findViewById(R.id.ic_back);
 
@@ -126,10 +123,10 @@ public class ProductoFragment extends Fragment  implements ProductosResultsAdapt
 
 
   private void agregarProduct(){
-      anadir_producto_menu.setOnClickListener(v->{
+      /*anadir_producto_menu.setOnClickListener(v->{
           Intent intent= AddProductActivity.startIntentAddProductActivity(getContext(),mCategoria_producto_empresa);
           startActivity(intent);
-      });
+      });*/
   }
 
     @Override

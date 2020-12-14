@@ -65,7 +65,8 @@
 
     <style name="StylePromedio">
         <item name="android:textColor">@color/titulo</item>
-        <item name="android:textSize">16sp</item>
+        <item name= "android:fontFamily" > @font/proxima_nova_alt_bold </item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name= "NovaTextViewStyle" parent= "android:Widget.TextView" >
