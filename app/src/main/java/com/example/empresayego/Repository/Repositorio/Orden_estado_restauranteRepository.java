@@ -2,6 +2,7 @@ package com.example.empresayego.Repository.Repositorio;
 
 import com.example.empresayego.Repository.Modelo.Orden_estado_restaurante;
 import com.example.empresayego.Repository.Service.Orden_estado_restauranteService;
+import com.example.empresayego.Repository.UrlBase;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,12 +13,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 
 public class Orden_estado_restauranteRepository {
 
-
-    private static final String ESTADO_ORDEN_SERVICE_URL_BASE="https://backend-tiend-go.herokuapp.com/";
 
     private Orden_estado_restauranteService orden_estado_restauranteService;
 
@@ -34,7 +32,7 @@ public class Orden_estado_restauranteRepository {
         OkHttpClient client= new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl(ESTADO_ORDEN_SERVICE_URL_BASE)
+                .baseUrl(UrlBase.URL_BASE)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

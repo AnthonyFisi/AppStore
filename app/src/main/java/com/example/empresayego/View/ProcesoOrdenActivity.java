@@ -51,8 +51,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import static com.example.empresayego.R.*;
-import static com.example.empresayego.R.string.*;
+import static com.example.empresayego.R.id;
+import static com.example.empresayego.R.layout;
+import static com.example.empresayego.R.mipmap;
+import static com.example.empresayego.R.navigation;
+import static com.example.empresayego.R.raw;
+import static com.example.empresayego.R.string.pusher_apikey;
+import static com.example.empresayego.R.string.pusher_canal_proces;
+import static com.example.empresayego.R.string.pusher_canal_reciente;
+import static com.example.empresayego.R.string.pusher_cluster;
 
 public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOdersFragment.EmpresaEnable , SoporteFragment.BackToInicio, DataEmpresaFragment.BackToInicio, ProductoFragment.BackToInicio, CerrarSesionFragment.BackToInicio {
     private static final String RESPUESTA = "repsuesta";
@@ -166,10 +173,10 @@ public class ProcesoOrdenActivity extends AppCompatActivity implements ListNewOd
 
     private void settingPusher(){
         PusherOptions options = new PusherOptions();
-        options.setCluster(getString(pusher_region));
+        options.setCluster(getString(pusher_cluster));
         pusher = new Pusher( getString(pusher_apikey), options);
-        channel= pusher.subscribe("canal-orden-reciente-"+Empresa.sEmpresa.getIdempresa());
-        channel_proces=pusher.subscribe("canal-orden-proces-"+Empresa.sEmpresa.getIdempresa());
+        channel = pusher.subscribe(getString(pusher_canal_reciente) + Empresa.sEmpresa.getIdempresa());
+        channel_proces = pusher.subscribe(getString(pusher_canal_proces) + Empresa.sEmpresa.getIdempresa());
     }
 
     public void initDataDrawer(){

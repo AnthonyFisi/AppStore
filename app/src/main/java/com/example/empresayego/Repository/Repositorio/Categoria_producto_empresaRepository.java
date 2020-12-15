@@ -2,7 +2,7 @@ package com.example.empresayego.Repository.Repositorio;
 
 import com.example.empresayego.Repository.Modelo.Gson.GsonCategoria_producto_empresa;
 import com.example.empresayego.Repository.Service.Categoria_producto_empresaService;
-
+import com.example.empresayego.Repository.UrlBase;
 
 import androidx.lifecycle.MutableLiveData;
 import okhttp3.OkHttpClient;
@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Categoria_producto_empresaRepository {
 
-    private static final String CATEGORIA_SEARCH_SERVICE_URL_BASE="https://backend-tiend-go.herokuapp.com/";
 
     private Categoria_producto_empresaService mCategoria_producto_empresaService;
 
@@ -28,7 +27,7 @@ public class Categoria_producto_empresaRepository {
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
         mCategoria_producto_empresaService = new retrofit2.Retrofit.Builder()
-                .baseUrl(CATEGORIA_SEARCH_SERVICE_URL_BASE)
+                .baseUrl(UrlBase.URL_BASE)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
