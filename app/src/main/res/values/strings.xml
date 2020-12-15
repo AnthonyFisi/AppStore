@@ -72,15 +72,10 @@
     <!-- SECTION KEY -->
 
 
-    <!--CREATE AN ACCOUNT IN GOOGLECLOUD AND ADQUIRE YOUR APIKEY CREDENTIAL -->
-
-    <string name="googlemaps_place_apikey">AIzaSyD2616cCRnG5qtSjl39FWuZOgJDCqmbtmg</string>
-    <string name="googlemaps_autocomplete_apikey">AIzaSyAovb3NQYJdlU_a8SwdrWIe2cj-e2NWOmM</string>
-
     <!--CREATE AN ACCOUNT IN PUSHER AND ADQUIRE YOUR APIKEY CREDENTIAL -->
 
-    <string name="pusher_cluster">us2</string>
-    <string name="pusher_apikey">18c8170377c406cfcf3a</string>
+    <string name="pusher_cluster"></string>
+    <string name="pusher_apikey"></string>
     <string name="pusher_canal_reciente">canal-orden-reciente-</string>
     <string name="pusher_canal_proces">canal-orden-proces-</string>
 
