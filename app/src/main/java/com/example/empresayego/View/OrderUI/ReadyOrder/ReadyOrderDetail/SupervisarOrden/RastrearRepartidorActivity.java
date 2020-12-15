@@ -111,6 +111,9 @@ public class RastrearRepartidorActivity extends AppCompatActivity implements OnM
 
     private void drawDeliveryPosition(DocumentSnapshot data){
 
+        mMap.clear();
+
+
         HashMap<String, Object> value = (   HashMap<String, Object>) data.getData();
 
         String locationString=value.get("location").toString();
@@ -130,7 +133,7 @@ public class RastrearRepartidorActivity extends AppCompatActivity implements OnM
 
         // markerOptions.title(location.latitude+ " : "+location.longitude);
 
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.moto));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.motorcycle1));
 
 
 
@@ -154,13 +157,32 @@ public class RastrearRepartidorActivity extends AppCompatActivity implements OnM
         markerOptions2.title(Empresa.sEmpresa.getNombre_empresa());
 
 
-        markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.store));
+        markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_tienda));
 
 
         mMap.addMarker(markerOptions2);
 
 
-        mMap.clear();
+
+        double lat3 = Double.parseDouble(mRestaurante_pedido.getMaps_coordenada_x());
+
+        double lng3 = Double.parseDouble(mRestaurante_pedido.getMaps_coordenada_y());
+
+
+        LatLng location3 = new LatLng(lat3, lng3);
+
+
+        MarkerOptions markerOptions3=new MarkerOptions();
+
+        markerOptions2.position(location3);
+
+        markerOptions2.title(mRestaurante_pedido.getNombre());
+
+
+        markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.store1));
+
+
+        mMap.addMarker(markerOptions2);
 
 
 
