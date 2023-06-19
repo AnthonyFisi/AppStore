@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/fragment_INCREMENT_TIME_FRAGMENT"
-        android:name="com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

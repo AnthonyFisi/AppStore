@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/fragment_new_order_detail"
-        android:name="com.example.empresayego.View.OrderUI.NewOrder.Detail.NewOrderDetailFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.NewOrder.Detail.NewOrderDetailFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

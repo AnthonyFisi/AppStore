@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.empresayego">
+    package="com.mimiperla.empresayego">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -16,21 +16,22 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-        android:name=".Login.MyApp"
+        android:name="com.mimiperla.empresayego.Login.MyApp"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeActivity"></activity>
-        <activity android:name=".View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementPrice.IncrementPriceActivity" />
-        <activity android:name=".View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.CancelarPedidoActivity" />
-        <activity android:name=".View.DrawerUI.productos.AddProduct.NewProductActivity" />
-        <activity android:name=".View.DrawerUI.productos.AddProduct.AddProductActivity" />
-        <activity android:name=".View.DrawerUI.productos.ProductoDetail.CategoriaDetailActivity" />
-        <activity android:name=".View.DrawerUI.historial.DetalleHistorial.OrderReadyHistorialActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementTime.IncrementTimeActivity"></activity>
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.IncrementPrice.IncrementPriceActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.CancelarPedidoActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.DrawerUI.productos.AddProduct.NewProductActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.DrawerUI.productos.AddProduct.AddProductActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.DrawerUI.productos.ProductoDetail.CategoriaDetailActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.DrawerUI.historial.DetalleHistorial.OrderReadyHistorialActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,42 +45,43 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.mimiperla.empresayego.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".View.OrderUI.ReadyOrder.ReadyOrderDetail.SupervisarOrden.RastrearRepartidorActivity" />
-        <activity android:name=".View.DrawerUI.historial.DetalleHistorial.RastrearRepartidorHistorialActivity" />
-        <activity android:name=".Login.IniciarSesionActivity" />
-        <activity android:name=".TrackerActivity" />
-        <activity android:name=".View.OrderUI.ProcessOrder.Detail.Ayuda.AyudaActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ReadyOrder.ReadyOrderDetail.SupervisarOrden.RastrearRepartidorActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.DrawerUI.historial.DetalleHistorial.RastrearRepartidorHistorialActivity" />
+        <activity android:name="com.mimiperla.empresayego.Login.IniciarSesionActivity" />
+        <activity android:name="com.mimiperla.empresayego.TrackerActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.AyudaActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".View.MapsActivity"
+            android:name="com.mimiperla.empresayego.View.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".View.OrderUI.ReadyOrder.ReadyOrderDetail.OrderReadyDetailActivity" />
-        <activity android:name=".View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity" />
-        <activity android:name=".View.OrderUI.NewOrder.Detail.NewOrderDetailActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ReadyOrder.ReadyOrderDetail.OrderReadyDetailActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderActivity" />
+        <activity android:name="com.mimiperla.empresayego.View.OrderUI.NewOrder.Detail.NewOrderDetailActivity" />
         <activity
-            android:name=".View.ProcesoOrdenActivity"
+            android:name="com.mimiperla.empresayego.View.ProcesoOrdenActivity"
             android:label="@string/title_activity_proceso_orden"
             android:theme="@style/AppThemeProceso" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.mimiperla.empresayego.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Proof.TrackerActivity" />
-        <activity android:name=".Proof.DisplayActivity" />
-        <activity android:name=".Login.SplashActivity">
+        <activity android:name="com.mimiperla.empresayego.Proof.TrackerActivity" />
+        <activity android:name="com.mimiperla.empresayego.Proof.DisplayActivity" />
+        <activity android:name="com.mimiperla.empresayego.Login.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.NetworkActivity" />
+        <activity android:name="com.mimiperla.empresayego.Login.NetworkActivity" />
 
         <provider
             android:authorities="${applicationId}.provider"

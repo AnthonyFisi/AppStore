@@ -16,7 +16,7 @@
 
         <fragment
             android:id="@+id/fragment_ready_order_detail_PRODUCTS"
-            android:name="com.example.empresayego.View.DrawerUI.historial.DetalleHistorial.ProductsHistorialFragment"
+            android:name="com.mimiperla.empresayego.View.DrawerUI.historial.DetalleHistorial.ProductsHistorialFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/CONFIRMAR_ENTREGA"

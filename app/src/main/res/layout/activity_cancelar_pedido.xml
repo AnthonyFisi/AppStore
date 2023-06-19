@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/fragment_ELIMINAR_FRAGMENT"
-        android:name="com.example.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.EliminarFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.Ayuda.CancelarPedido.EliminarFragment"
         tools:layout="@layout/fragment_eliminar"
         android:layout_width="0dp"
         android:layout_height="0dp"

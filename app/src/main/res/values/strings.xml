@@ -74,8 +74,8 @@
 
     <!--CREATE AN ACCOUNT IN PUSHER AND ADQUIRE YOUR APIKEY CREDENTIAL -->
 
-    <string name="pusher_cluster"></string>
-    <string name="pusher_apikey"></string>
+    <string name="pusher_cluster">us2</string>
+    <string name="pusher_apikey">205b5aefd2b3aa809c52</string>
     <string name="pusher_canal_reciente">canal-orden-reciente-</string>
     <string name="pusher_canal_proces">canal-orden-proces-</string>
 

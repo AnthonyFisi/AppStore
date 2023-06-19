@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/fragment_proces_order_detail"
-        android:name="com.example.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderDetailFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.Detail.ProcesOrderDetailFragment"
         tools:layout="@layout/fragment_proces_orders_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment_productos"
-        android:name="com.example.empresayego.View.DrawerUI.productos.ProductoFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.productos.ProductoFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

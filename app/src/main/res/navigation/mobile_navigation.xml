@@ -7,53 +7,53 @@
 
     <fragment
         android:id="@+id/navigation_list_new_orders"
-        android:name="com.example.empresayego.View.OrderUI.NewOrder.ListNewOdersFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.NewOrder.ListNewOdersFragment"
         android:label="@string/title_new_order"
         tools:layout="@layout/fragment_list_new_orders" />
 
     <fragment
         android:id="@+id/navigation_proces_orders"
-        android:name="com.example.empresayego.View.OrderUI.ProcessOrder.ProcesOrderFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.ProcessOrder.ProcesOrderFragment"
         android:label="@string/title_proceso"
         tools:layout="@layout/fragment_proces_orders" />
 
     <fragment
         android:id="@+id/navigation_ready_order"
-        android:name="com.example.empresayego.View.OrderUI.ReadyOrder.ReadyOrderFragment"
+        android:name="com.mimiperla.empresayego.View.OrderUI.ReadyOrder.ReadyOrderFragment"
         android:label="@string/title_ready"
         tools:layout="@layout/fragment_ready_order" />
 
     <fragment
         android:id="@+id/nav_producto"
-        android:name="com.example.empresayego.View.DrawerUI.productos.ProductoFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.productos.ProductoFragment"
         android:label="ProductoFragment"
         tools:layout="@layout/fragment_producto" />
 
     <fragment
         android:id="@+id/nav_deuda"
-        android:name="com.example.empresayego.View.DrawerUI.deuda.DeudaFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.deuda.DeudaFragment"
         android:label="DeudaFragment"
         tools:layout="@layout/fragment_deuda" />
 
     <fragment
         android:id="@+id/nav_historial"
-        android:name="com.example.empresayego.View.DrawerUI.historial.HistorialFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.historial.HistorialFragment"
         android:label="SendFragment"
         tools:layout="@layout/fragment_historial" />
 
     <fragment
         android:id="@+id/nav_data_empresa"
-        android:name="com.example.empresayego.View.DrawerUI.dataEmpresa.DataEmpresaFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.dataEmpresa.DataEmpresaFragment"
         android:label="fragment_data_empresa"
         tools:layout="@layout/fragment_data_empresa" />
     <fragment
         android:id="@+id/nav_cerrar_sesion"
-        android:name="com.example.empresayego.View.DrawerUI.cerrar_sesion.CerrarSesionFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.cerrar_sesion.CerrarSesionFragment"
         android:label="fragment_cerrar_sesion"
         tools:layout="@layout/fragment_tools" />
     <fragment
         android:id="@+id/nav_soporte"
-        android:name="com.example.empresayego.View.DrawerUI.soporte.SoporteFragment"
+        android:name="com.mimiperla.empresayego.View.DrawerUI.soporte.SoporteFragment"
         android:label="fragment_soporte"
         tools:layout="@layout/fragment_soporte" />
 

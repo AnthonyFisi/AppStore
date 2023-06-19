@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context="com.example.styledmap.MapsActivityRaw" />
+        tools:context="com.mimiperla.styledmap.MapsActivityRaw" />
 
 <!--
     <androidx.cardview.widget.CardView
